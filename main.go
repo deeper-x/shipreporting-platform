@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/deeper-x/shipreporting-platform/webserver"
+	"github.com/shipreporting-platform/webserver"
 )
 
-var inst webserver.Instance
+var inst = webserver.Instance{}
 
 func main() {
 	inst.EngineBuild()
+	inst.Route()
 	inst.Run()
 }
