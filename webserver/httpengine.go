@@ -11,7 +11,7 @@ import (
 type Server interface {
 	EngineBuild() error
 	Route()
-	Run() error
+	Serve() error
 }
 
 // Instance todo doc
@@ -33,8 +33,8 @@ func (i *Instance) EngineBuild() error {
 	return nil
 }
 
-// Run todo doc - Test in Unit testing
-func (i *Instance) Run() error {
+// Serve todo doc - Test in Unit testing
+func (i *Instance) Serve() error {
 	err := i.Engine.Run()
 
 	if err != nil {
@@ -43,9 +43,9 @@ func (i *Instance) Run() error {
 	return err
 }
 
-// Serve todo doc
-func Serve(s Server) {
+// Run todo doc
+func Run(s Server) {
 	s.EngineBuild()
 	s.Route()
-	s.Run()
+	s.Serve()
 }

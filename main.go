@@ -7,5 +7,5 @@ import (
 var inst = webserver.Instance{}
 
 func main() {
-	webserver.Serve(&inst)
+	webserver.Run(&inst)
 }
