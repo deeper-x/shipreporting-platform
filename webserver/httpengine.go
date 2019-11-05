@@ -9,9 +9,9 @@ import (
 
 // Server todo doc
 type Server interface {
-	EngineBuild()
+	EngineBuild() error
 	Route()
-	Run()
+	Run() error
 }
 
 // Instance todo doc
@@ -41,4 +41,11 @@ func (i *Instance) Run() error {
 		fmt.Println(err)
 	}
 	return err
+}
+
+// Serve todo doc
+func Serve(s Server) {
+	s.EngineBuild()
+	s.Route()
+	s.Run()
 }

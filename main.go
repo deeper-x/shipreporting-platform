@@ -7,7 +7,5 @@ import (
 var inst = webserver.Instance{}
 
 func main() {
-	inst.EngineBuild()
-	inst.Route()
-	inst.Run()
+	webserver.Serve(&inst)
 }
