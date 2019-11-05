@@ -23,14 +23,7 @@ type Instance struct {
 func (i *Instance) EngineBuild() error {
 	r := gin.Default()
 
-	// static stuff registration
-	staticPath := fmt.Sprintf("%v/templates/layout/theme/classic/assets/", utils.ProjectRoot)
-
-	if exists, err := utils.ResExist(staticPath); !exists {
-		return err
-	}
-
-	r.Static("/assets", staticPath)
+	r.Static("/assets", utils.StaticPath)
 
 	//templates architecture mapping
 	r.HTMLRender = multiRenderer()
@@ -40,7 +33,7 @@ func (i *Instance) EngineBuild() error {
 	return nil
 }
 
-// Run todo doc
+// Run todo doc - Test in Unit testing
 func (i *Instance) Run() error {
 	err := i.Engine.Run()
 

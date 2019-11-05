@@ -13,3 +13,6 @@ var ProjectRoot = fmt.Sprintf("%s/src/github.com/deeper-x/%s", os.Getenv("GOPATH
 
 // EnvFile .env location
 var EnvFile = fmt.Sprintf("%s/.env", ProjectRoot)
+
+// StaticPath stuff registration
+var StaticPath = fmt.Sprintf("%v/templates/layout/theme/classic/assets/", ProjectRoot)
