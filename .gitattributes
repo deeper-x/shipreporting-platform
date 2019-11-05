@@ -1,4 +1,5 @@
 *.go -text diff=golang
 *.go linguist-language=golang
 *.html linguist-detectable=false
+*.css linguist-detectable=false
 *.go linguist-detectable=true
