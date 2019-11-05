@@ -14,9 +14,9 @@ func main() {
 
 	r.HTMLRender = createMultiple()
 
-	r.GET("/home", func(x *gin.Context) {
-		x.HTML(http.StatusOK, "home", gin.H{
-			"ship_name": "Eurocargo XYZ",
+	r.GET("/mooring_now", func(x *gin.Context) {
+		x.HTML(http.StatusOK, "mooring_now", gin.H{
+			"shipName": "Eurocargo XYZ",
 		})
 	})
 
@@ -25,7 +25,7 @@ func main() {
 
 func createMultiple() multitemplate.Renderer {
 	r := multitemplate.NewRenderer()
-	r.AddFromFiles("home", "templates/layout/theme/classic/default/index.html", "templates/tables/mooring_now.html")
+	r.AddFromFiles("mooring_now", "templates/layout/theme/classic/default/index.html", "templates/tables/mooring_now.html")
 
 	return r
 }
