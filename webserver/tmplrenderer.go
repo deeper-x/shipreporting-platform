@@ -5,9 +5,6 @@ import (
 	"github.com/shipreporting-platform/utils"
 )
 
-var indexPath = utils.FullPath("/templates/layout/theme/classic/default/index.html")
-var mooringPath = utils.FullPath("/templates/tables/mooring_now.html")
-
 var paths = map[string]string{
 	"indexPath":   utils.FullPath("/templates/layout/theme/classic/default/index.html"),
 	"mooringPath": utils.FullPath("/templates/tables/mooring_now.html"),
@@ -36,5 +33,6 @@ func PathChecker(list map[string]string) bool {
 			return false
 		}
 	}
+
 	return true
 }
