@@ -2,6 +2,8 @@ package webserver
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var inst = Instance{}
@@ -13,4 +15,10 @@ func TestEngineBuild(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+}
+
+func TestMultiRenderer(t *testing.T) {
+	ok, _ := multiRenderer()
+
+	assert.True(t, ok)
 }

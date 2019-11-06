@@ -26,7 +26,7 @@ func (i *Instance) EngineBuild() error {
 	r.Static("/assets", utils.StaticPath)
 
 	//templates architecture mapping
-	r.HTMLRender = multiRenderer()
+	_, r.HTMLRender = multiRenderer()
 
 	i.Engine = r
 

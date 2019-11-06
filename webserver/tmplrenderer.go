@@ -8,11 +8,33 @@ import (
 var indexPath = utils.FullPath("/templates/layout/theme/classic/default/index.html")
 var mooringPath = utils.FullPath("/templates/tables/mooring_now.html")
 
+var paths = map[string]string{
+	"indexPath":   utils.FullPath("/templates/layout/theme/classic/default/index.html"),
+	"mooringPath": utils.FullPath("/templates/tables/mooring_now.html"),
+}
+
 // multiRenderer todo doc
-func multiRenderer() multitemplate.Renderer {
+func multiRenderer() (bool, multitemplate.Renderer) {
 	r := multitemplate.NewRenderer()
 
-	r.AddFromFiles("mooring_now", indexPath, mooringPath)
+	// templates must exists
+	checker := PathChecker(paths)
+	if !checker {
+		return false, nil
+	}
 
-	return r
+	// load one by one
+	r.AddFromFiles("mooring_now", paths["indexPath"], paths["mooringPath"])
+
+	return true, r
+}
+
+// PathChecker check if fs resource exist
+func PathChecker(list map[string]string) bool {
+	for i := range list {
+		if ok, _ := utils.ResExist(list[i]); !ok {
+			return false
+		}
+	}
+	return true
 }
