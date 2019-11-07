@@ -1,12 +1,41 @@
 {{ define "main_content" }}
-{{ .shipName }}
-<table>
-<tr>
-    <td>Viaggio</td>
-    <td>Nave</td>
-    <td>Orario</td>
-    <td>Banchina</td>
-    <td></td>
-</tr>
-</table>
+
+
+<div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
+
+  <script type="text/javascript" charset="utf-8">
+    // specify the columns
+   var columnDefs = [
+      {headerName: "id", field: "id_trip", width: 60},
+      {headerName: "ship", field: "ship"},
+      {headerName: "type", field: "ship_type"},
+      {headerName: "mooring", field: "mooring_time", filter: "agDateColumnFilter"},
+      {headerName: "quay", field: "quay"},
+      {headerName: "shipping", field: "shipped_goods"},
+      {headerName: "iso3", field: "iso3"},
+      {headerName: "agency", field: "agency"},
+    ];
+
+    // let the grid know which columns to use
+    var gridOptions = {
+      columnDefs: columnDefs
+    };
+
+  // lookup the container we want the Grid to use
+  var eGridDiv = document.querySelector('#myGrid');
+
+  // create the grid passing in the div to use together with the columns & data we want to use
+  new agGrid.Grid(eGridDiv, gridOptions)
+
+  
+  agGrid.simpleHttpRequest({url: 'http://127.0.0.1:8000/moored/27'}).then(function(data) {
+      gridOptions.api.setRowData(data);
+  });
+
+
+  </script>
+
+
 {{ end }}
+
+

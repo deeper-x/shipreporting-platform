@@ -23,7 +23,8 @@ type Instance struct {
 func (i *Instance) EngineBuild() error {
 	r := gin.Default()
 
-	r.Static("/assets", utils.StaticPath)
+	r.Static("/assets", utils.TemplateAssets)
+	r.Static("/grid", utils.GridAssets)
 
 	//templates architecture mapping
 	_, r.HTMLRender = multiRenderer()

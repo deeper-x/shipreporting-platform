@@ -23,6 +23,6 @@ var MooringNow = func(x *gin.Context) {
 	}
 
 	x.HTML(http.StatusOK, "mooring_now", gin.H{
-		"shipName": jsonData,
+		"data": jsonData,
 	})
 }
