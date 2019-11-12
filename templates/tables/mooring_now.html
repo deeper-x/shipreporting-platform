@@ -1,19 +1,77 @@
 {{ define "main_content" }}
 
-
+<script type="module" src="../grid/js/build/main.js"></script>
 <div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
+<script type="module" charset="utf-8">
 
-  <script type="text/javascript" charset="utf-8">
+    import {getDay, getMonth, getYear, getHour, getMinute} from '../grid/js/build/main.js';
     // specify the columns
    var columnDefs = [
-      {headerName: "id", field: "id_trip", width: 60},
-      {headerName: "ship", field: "ship"},
-      {headerName: "type", field: "ship_type"},
-      {headerName: "mooring", field: "mooring_time", filter: "agDateColumnFilter"},
-      {headerName: "quay", field: "quay"},
-      {headerName: "shipping", field: "shipped_goods"},
-      {headerName: "iso3", field: "iso3"},
-      {headerName: "agency", field: "agency"},
+      {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "Ship", field: "ship", filter: "agTextColumnFilter" },
+      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
+      
+      {headerName: "Mooring DD/MM/YYYY HH:mm",
+      children: [
+          {
+            headerName: "D", 
+            field: "mooring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getDay(value.data.mooring_time);
+            },
+            width: 60,
+          },
+          {
+            headerName: "M", 
+            field: "mooring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getMonth(value.data.mooring_time);
+            },
+            width: 60,
+          },
+          {
+            headerName: "Y", 
+            field: "mooring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value )=> {
+              return getYear(value.data.mooring_time)
+            },
+            width: 60,
+          },
+          {
+            headerName: "H", 
+            field: "mooring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getHour(value.data.mooring_time);
+            },
+            width: 60,
+          },
+          {
+            headerName: "m", 
+            field: "mooring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getMinute(value.data.mooring_time);
+            },
+            width: 60,
+          },
+      ]
+        },
+      {
+          headerName: "Quay", field: "quay", filter: "agTextColumnFilter",
+      },
+      {
+        headerName: "Shipping", field: "shipped_goods", filter: "agTextColumnFilter", resizable: true,
+      },
+      {
+        headerName: "ISO3", field: "iso3", width: 80, filter: "agTextColumnFilter",
+      },
+      {
+        headerName: "Agency", field: "agency", filter: "agTextColumnFilter",
+      },
     ];
 
     // let the grid know which columns to use
@@ -28,12 +86,12 @@
   new agGrid.Grid(eGridDiv, gridOptions)
 
   
-  agGrid.simpleHttpRequest({url: 'http://127.0.0.1:8000/moored/27'}).then(function(data) {
+  agGrid.simpleHttpRequest({url: 'http://80.88.88.162:8000/moored/27'}).then(function(data) {
       gridOptions.api.setRowData(data);
   });
 
 
-  </script>
+</script>
 
 
 {{ end }}
