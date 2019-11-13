@@ -29,9 +29,6 @@ jobs:
           name: install-node-repo
           command: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
       - run:
-          name: change-dir
-          command: cd grid/js
-      - run:
           name: install-node
           command: sudo apt install nodejs
       - run:
@@ -43,4 +40,4 @@ jobs:
             - ./node_modules
       - run: # run tests
           name: test
-          command: npm test
+          command: cd grid/js; npm test
