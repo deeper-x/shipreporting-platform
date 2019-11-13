@@ -1,0 +1,76 @@
+{{ define "main_content" }}
+
+<div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
+<script type="module" charset="utf-8">
+
+    import {getDay, getMonth, getYear, getHour, getMinute} from '../grid/js/build/main.js';
+    // specify the columns
+    var columnDefs = [
+      {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "Ship", field: "ship_name", filter: "agTextColumnFilter" },
+      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
+      //  grossTonnage, length, width, shippedGoods, tsPlannedMooring, tsReadiness
+      {
+        headerName: "ISO3", field: "ship_flag", width: 80, filter: "agTextColumnFilter",
+      },
+      {
+        headerName: "Cont", field: "num_container", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Pax", field: "num_passengers", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Cam", field: "num_camion", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Furg", field: "num_furgoni", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Trails", field: "num_rimorchi", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Cars", field: "num_auto", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Moto", field: "num_moto", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Camp", field: "num_camper", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Bus", field: "num_bus", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Minibus", field: "num_minibus", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Op", field: "mvnt_type", width: 80, filter: "agNumberColumnFilter",
+      },
+      {
+        headerName: "Quay", field: "quay", width: 80, filter: "agNumberColumnFilter", resizable: true,
+      },
+    ];
+
+    // let the grid know which columns to use
+    var gridOptions = {
+      columnDefs: columnDefs
+    };
+
+  // lookup the container we want the Grid to use
+  var eGridDiv = document.querySelector('#myGrid');
+
+  // create the grid passing in the div to use together with the columns & data we want to use
+  new agGrid.Grid(eGridDiv, gridOptions)
+
+  
+  agGrid.simpleHttpRequest({url: 'http://80.88.88.162:8000/trafficListToday/27'}).then(function(data) {
+      gridOptions.api.setRowData(data);
+  });
+
+
+</script>
+
+
+{{ end }}
+
+

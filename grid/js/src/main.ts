@@ -11,12 +11,23 @@ export function getDay(value: string): number{
 }
 
 export function getHour(value: string): number{
-    let hhmm = value.split("T")[1];
-    return Number(hhmm.split(":")[0]);
+    if (value.indexOf("T") != -1) {
+        let hhmm = value.split("T")[1];
+        return Number(hhmm.split(":")[0]);
+    } else {
+        let hhmm = value.split(" ")[1];
+        return Number(hhmm.split(":")[0]);
+    }
+        
 }
 
 export function getMinute(value: string): number{
-    let hhmm = value.split("T")[1];
-    return Number(hhmm.split(":")[1]);
+    if (value.indexOf("T") != -1) {
+        let hhmm = value.split("T")[1];
+        return Number(hhmm.split(":")[1]);
+    } else {
+        let hhmm = value.split(" ")[1];
+        return Number(hhmm.split(":")[1]);
+    }
 }
 

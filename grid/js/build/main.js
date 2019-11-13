@@ -8,10 +8,22 @@ export function getDay(value) {
     return Number(value.split("-")[2].substr(0, 2));
 }
 export function getHour(value) {
-    var hhmm = value.split("T")[1];
-    return Number(hhmm.split(":")[0]);
+    if (value.indexOf("T") != -1) {
+        var hhmm = value.split("T")[1];
+        return Number(hhmm.split(":")[0]);
+    }
+    else {
+        var hhmm = value.split(" ")[1];
+        return Number(hhmm.split(":")[0]);
+    }
 }
 export function getMinute(value) {
-    var hhmm = value.split("T")[1];
-    return Number(hhmm.split(":")[1]);
+    if (value.indexOf("T") != -1) {
+        var hhmm = value.split("T")[1];
+        return Number(hhmm.split(":")[1]);
+    }
+    else {
+        var hhmm = value.split(" ")[1];
+        return Number(hhmm.split(":")[1]);
+    }
 }

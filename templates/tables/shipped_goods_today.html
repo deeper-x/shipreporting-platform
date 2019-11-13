@@ -1,0 +1,52 @@
+{{ define "main_content" }}
+
+<div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
+<script type="module" charset="utf-8">
+
+    import {getDay, getMonth, getYear, getHour, getMinute} from '../grid/js/build/main.js';
+    // specify the columns
+    var columnDefs = [
+      {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "Ship", field: "ship_name", filter: "agTextColumnFilter" },
+      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
+      //  grossTonnage, length, width, shippedGoods, tsPlannedMooring, tsReadiness
+      {
+        headerName: "ISO3", field: "ship_flag", width: 80, filter: "agTextColumnFilter",
+      },
+      {
+        headerName: "Shipping", field: "goods_category", filter: "agTextColumnFilter", resizable: true,
+      },
+      {
+        headerName: "Quantity", field: "quantity", filter: "agTextColumnFilter",
+      },
+      {
+        headerName: "Unit", field: "unit", filter: "agTextColumnFilter",
+      },
+      {
+        headerName: "Operation", field: "goods_mvmnt_type", filter: "agTextColumnFilter",
+      },
+    ];
+
+    // let the grid know which columns to use
+    var gridOptions = {
+      columnDefs: columnDefs
+    };
+
+  // lookup the container we want the Grid to use
+  var eGridDiv = document.querySelector('#myGrid');
+
+  // create the grid passing in the div to use together with the columns & data we want to use
+  new agGrid.Grid(eGridDiv, gridOptions)
+
+  
+  agGrid.simpleHttpRequest({url: 'http://80.88.88.162:8000/shippedGoodsToday/28'}).then(function(data) {
+      gridOptions.api.setRowData(data);
+  });
+
+
+</script>
+
+
+{{ end }}
+
+

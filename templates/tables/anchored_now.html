@@ -1,0 +1,99 @@
+{{ define "main_content" }}
+
+<div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
+<script type="module" charset="utf-8">
+
+    import {getDay, getMonth, getYear, getHour, getMinute} from '../grid/js/build/main.js';
+    // specify the columns
+    var columnDefs = [
+      {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "Ship", field: "ship", filter: "agTextColumnFilter" },
+      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
+      //  grossTonnage, length, width, shippedGoods, tsPlannedMooring, tsReadiness
+
+      {headerName: "Anchored DD/MM/YYYY HH:mm",
+      children: [
+          {
+            headerName: "D", 
+            field: "anchoring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getDay(value.data.anchoring_time);
+            },
+            width: 60,
+          },
+          {
+            headerName: "M", 
+            field: "anchoring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getMonth(value.data.anchoring_time);
+            },
+            width: 60,
+          },
+          {
+            headerName: "Y", 
+            field: "anchoring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value )=> {
+              return getYear(value.data.anchoring_time)
+            },
+            width: 60,
+          },
+          {
+            headerName: "H", 
+            field: "anchoring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getHour(value.data.anchoring_time);
+            },
+            width: 60,
+          },
+          {
+            headerName: "m", 
+            field: "anchoring_time", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getMinute(value.data.anchoring_time);
+            },
+            width: 60,
+          },
+      ]
+        },
+      {
+        headerName: "Point", field: "anchorage_point", filter: "agTextColumnFilter",
+      },
+      {
+        headerName: "Shipping", field: "shipped_goods", filter: "agTextColumnFilter", resizable: true,
+      },
+      {
+        headerName: "ISO3", field: "iso3", width: 80, filter: "agTextColumnFilter",
+      },
+      {
+        headerName: "Agency", field: "agency", filter: "agTextColumnFilter",
+      },
+    ];
+
+    // let the grid know which columns to use
+    var gridOptions = {
+      columnDefs: columnDefs
+    };
+
+  // lookup the container we want the Grid to use
+  var eGridDiv = document.querySelector('#myGrid');
+
+  // create the grid passing in the div to use together with the columns & data we want to use
+  new agGrid.Grid(eGridDiv, gridOptions)
+
+  
+  agGrid.simpleHttpRequest({url: 'http://80.88.88.162:8000/anchored/27'}).then(function(data) {
+      gridOptions.api.setRowData(data);
+  });
+
+
+</script>
+
+
+{{ end }}
+
+
