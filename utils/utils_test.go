@@ -27,8 +27,4 @@ func TestParameters(t *testing.T) {
 	if exist, err := ResExist(EnvFile); !exist {
 		t.Error(err)
 	}
-
-	if exist, err := ResExist(StaticPath); !exist {
-		t.Error(err)
-	}
 }
