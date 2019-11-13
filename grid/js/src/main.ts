@@ -1,6 +1,7 @@
 const firstElem = 0;
 const secondElem = 1;
 const thirdElem = 2;
+const notFound = -1;
 
 export const getYear = (value: string): number => {
     return Number(value.split("-")[firstElem]);
@@ -11,11 +12,11 @@ export const getMonth = (value: string): number => {
 }
 
 export const getDay = (value: string): number => {
-    return Number(value.split("-")[thirdElem].substr(0,2));
+    return Number(value.split("-")[thirdElem].substr(firstElem,thirdElem));
 }
 
 export const getHour = (value: string): number => {
-    if (value.indexOf("T") != -1) {
+    if (value.indexOf("T") != notFound) {
         const hhmm = value.split("T")[secondElem];
         return Number(hhmm.split(":")[firstElem]);
     } else {
@@ -26,7 +27,7 @@ export const getHour = (value: string): number => {
 }
 
 export const getMinute = (value: string): number => {
-    if (value.indexOf("T") != -1) {
+    if (value.indexOf("T") != notFound) {
         const hhmm = value.split("T")[secondElem];
         return Number(hhmm.split(":")[secondElem]);
     } else {
