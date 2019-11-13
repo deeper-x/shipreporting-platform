@@ -27,7 +27,7 @@ jobs:
   
       - run:
           name: update-npm
-          command: 'sudo npm install -g npm@latest'
+          command: 'sudo ./grid/js/node_modules/npm/bin/npm install -g npm@latest'
       - restore_cache: # special step to restore the dependency cache
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: dependency-cache-{{ checksum "package-lock.json" }}
