@@ -31,13 +31,10 @@ jobs:
       - run:
           name: install-node
           command: sudo apt install nodejs
-      - run:
-          name: install-npm
-          command: npm install
       - save_cache: # special step to save the dependency cache
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run: # run tests
           name: test
-          command: cd grid/js; npm test
+          command: cd grid/js; npm install; npm test
