@@ -7,7 +7,6 @@ jobs:
     docker:
       # specify the version
       - image: circleci/golang:1.13
-      - image: circleci/node:10.16.3
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -26,14 +25,11 @@ jobs:
       - run: go test -v ./...
   
       - run:
-          name: update-npm
-          command: 'sudo ./grid/js/node_modules/npm/bin/npm install -g npm@latest'
-      - restore_cache: # special step to restore the dependency cache
-          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-      - run:
           name: change-dir
           command: cd grid/js
+      - run:
+          name: install-node
+          command: sudo apt-get install node
       - run:
           name: install-npm
           command: npm install
