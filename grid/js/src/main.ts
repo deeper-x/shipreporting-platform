@@ -1,33 +1,37 @@
-export function getYear(value: string): number{
-    return Number(value.split("-")[0]);
+const firstElem = 0;
+const secondElem = 1;
+const thirdElem = 2;
+
+export const getYear = (value: string): number => {
+    return Number(value.split("-")[firstElem]);
 }
 
-export function getMonth(value: string): number{
-    return Number(value.split("-")[1]);
+export const getMonth = (value: string): number => {
+    return Number(value.split("-")[secondElem]);
 }
 
-export function getDay(value: string): number{
-    return Number(value.split("-")[2].substr(0,2));
+export const getDay = (value: string): number => {
+    return Number(value.split("-")[thirdElem].substr(0,2));
 }
 
-export function getHour(value: string): number{
+export const getHour = (value: string): number => {
     if (value.indexOf("T") != -1) {
-        let hhmm = value.split("T")[1];
-        return Number(hhmm.split(":")[0]);
+        const hhmm = value.split("T")[secondElem];
+        return Number(hhmm.split(":")[firstElem]);
     } else {
-        let hhmm = value.split(" ")[1];
-        return Number(hhmm.split(":")[0]);
+        const hhmm = value.split(" ")[secondElem];
+        return Number(hhmm.split(":")[firstElem]);
     }
         
 }
 
-export function getMinute(value: string): number{
+export const getMinute = (value: string): number => {
     if (value.indexOf("T") != -1) {
-        let hhmm = value.split("T")[1];
-        return Number(hhmm.split(":")[1]);
+        const hhmm = value.split("T")[secondElem];
+        return Number(hhmm.split(":")[secondElem]);
     } else {
-        let hhmm = value.split(" ")[1];
-        return Number(hhmm.split(":")[1]);
+        const hhmm = value.split(" ")[secondElem];
+        return Number(hhmm.split(":")[secondElem]);
     }
 }
 
