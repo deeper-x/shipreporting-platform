@@ -21,3 +21,12 @@ jobs:
 
     - name: Build
       run: go install -v .
+    
+    - name: Test
+      run: |
+        export GOPATH=$HOME/go
+        export GOBIN=$(go env GOPATH)/bin
+        export PATH=$PATH:$GOPATH
+        export PATH=$PATH:$GOBIN
+        go test -v -cover ./...
+        
