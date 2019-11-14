@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/shipreporting-platform/webserver"
+	"github.com/deeper-x/shipreporting-platform/webserver"
 )
 
 var inst = webserver.Instance{}

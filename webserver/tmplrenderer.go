@@ -1,8 +1,8 @@
 package webserver
 
 import (
+	"github.com/deeper-x/shipreporting-platform/utils"
 	"github.com/gin-contrib/multitemplate"
-	"github.com/shipreporting-platform/utils"
 )
 
 var paths = map[string]string{

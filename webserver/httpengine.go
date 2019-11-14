@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/shipreporting-platform/utils"
+	"github.com/deeper-x/shipreporting-platform/utils"
 )
 
 // Server todo doc
