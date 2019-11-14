@@ -33,5 +33,6 @@ jobs:
         mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
         mv $(pwd)/* $GOPATH/src/github.com/$GITHUB_REPOSITORY
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        touch .env
         go test -v -cover ./...
         
