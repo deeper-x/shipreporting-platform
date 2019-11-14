@@ -26,6 +26,3 @@ jobs:
 
     - name: Build
       run: go install -v .
-    
-    - name: Test
-      run: go test -v -cover ./... 
