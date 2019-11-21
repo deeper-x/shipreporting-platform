@@ -107,8 +107,11 @@ func TestAnchoredNow(t *testing.T) {
 }
 
 func TestArrivalsToday(t *testing.T) {
+	inst.LoadSession()
+
 	err := inst.EngineBuild()
 
+	inst.LoadSession()
 	if err != nil {
 		t.Error(err)
 	}

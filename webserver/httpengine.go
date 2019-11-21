@@ -3,8 +3,10 @@ package webserver
 import (
 	"fmt"
 
-	"github.com/gin-gonic/gin"
 	"github.com/deeper-x/shipreporting-platform/utils"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-gonic/gin"
 )
 
 // Server todo doc
@@ -19,13 +21,18 @@ type Instance struct {
 	Engine *gin.Engine
 }
 
+// LoadSession load session middleware
+func (i *Instance) LoadSession() {
+	store := cookie.NewStore([]byte("secret"))
+	i.Engine.Use(sessions.Sessions(userkey, store))
+}
+
 // EngineBuild todo doc
 func (i *Instance) EngineBuild() error {
 	r := gin.Default()
 
 	r.Static("/assets", utils.TemplateAssets)
 	r.Static("/grid", utils.GridAssets)
-
 	//templates architecture mapping
 	_, r.HTMLRender = multiRenderer()
 
