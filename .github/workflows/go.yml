@@ -21,7 +21,10 @@ jobs:
 
     - name: Build
       run: go install -v .
-    
+
+    - name: Run instance
+      run: go run main.go &
+
     - name: Test
       run: |
         export GOPATH=$HOME/go
