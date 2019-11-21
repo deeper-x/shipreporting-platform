@@ -4,12 +4,8 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
-	"net/url"
-	"os"
 	"testing"
 
-	"github.com/deeper-x/shipreporting-platform/utils"
-	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -52,24 +48,41 @@ func TestMooringNow(t *testing.T) {
 	assert.Equal(t, http.StatusUnauthorized, w.Code)
 }
 
-func TestLoginForm(t *testing.T) {
-	err := godotenv.Load(utils.DotenvFile)
+// func TestLoginForm(t *testing.T) {
+// 	err := inst.EngineBuild()
 
-	credentials := url.Values{
-		"username": {os.Getenv("TEST_USERNAME")},
-		"password": {os.Getenv("TEST_PASSWORD")},
-	}
+// 	if err != nil {
+// 		t.Error(err)
+// 	}
 
-	resp, err := http.PostForm("http://127.0.0.1:8080/enter", credentials)
+// 	inst.Route()
 
-	if err != nil {
-		log.Println(err)
-	}
+// 	err = godotenv.Load(utils.DotenvFile)
 
-	defer resp.Body.Close()
+// 	data := url.Values{}
+// 	data.Set("username", os.Getenv("TEST_USERNAME"))
+// 	data.Set("password", os.Getenv("TEST_PASSWORD"))
 
-	assert.Equal(t, http.StatusOK, resp.StatusCode)
-}
+// 	client := &http.Client{}
+
+// 	w := httptest.NewRecorder()
+// 	req, err := http.NewRequest("POST", "http://127.0.0.1:8080/enter", strings.NewReader(data.Encode()))
+// 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+// 	if err != nil {
+// 		log.Println(err)
+// 	}
+
+// 	resp, err := client.Do(req)
+
+// 	if err != nil {
+// 		t.Error(err)
+// 	}
+
+// 	inst.Engine.ServeHTTP(w, req)
+
+// 	assert.Equal(t, http.StatusOK, resp.StatusCode)
+// }
 
 func TestAnchoredNow(t *testing.T) {
 	err := inst.EngineBuild()
