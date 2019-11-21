@@ -6,7 +6,9 @@ import (
 )
 
 var paths = map[string]string{
+	"loginPath":             utils.FullPath("/templates/layout/theme/classic/default/login.html"),
 	"indexPath":             utils.FullPath("/templates/layout/theme/classic/default/index.html"),
+	"welcomePath":           utils.FullPath("/templates/layout/theme/classic/default/welcome.html"),
 	"mooringPath":           utils.FullPath("/templates/tables/mooring_now.html"),
 	"anchoredPath":          utils.FullPath("/templates/tables/anchored_now.html"),
 	"arrivalsTodayPath":     utils.FullPath("/templates/tables/arrivals_today.html"),
@@ -29,6 +31,8 @@ func multiRenderer() (bool, multitemplate.Renderer) {
 	}
 
 	// load one by one
+	r.AddFromFiles("login", paths["loginPath"])
+	r.AddFromFiles("welcome", paths["indexPath"], paths["welcomePath"])
 	r.AddFromFiles("mooring_now", paths["indexPath"], paths["mooringPath"])
 	r.AddFromFiles("anchored_now", paths["indexPath"], paths["anchoredPath"])
 	r.AddFromFiles("arrivals_today", paths["indexPath"], paths["arrivalsTodayPath"])

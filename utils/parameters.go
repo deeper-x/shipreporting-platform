@@ -19,3 +19,6 @@ var TemplateAssets = fmt.Sprintf("%v/templates/layout/theme/classic/assets/", Pr
 
 // GridAssets grid data tables
 var GridAssets = fmt.Sprintf("%v/grid/", ProjectRoot)
+
+// DotenvFile .env location
+var DotenvFile = fmt.Sprintf("%v/.env", ProjectRoot)
