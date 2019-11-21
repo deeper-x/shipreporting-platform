@@ -30,7 +30,6 @@ var AuthRequired = func(c *gin.Context) {
 
 // ProcessAuth auth processing
 var ProcessAuth = func(c *gin.Context) (int, string) {
-
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 

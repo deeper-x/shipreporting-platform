@@ -21,13 +21,13 @@ var Enter = func(c *gin.Context) {
 		created := CreateSession(c)
 
 		if !created {
-			c.Redirect(http.StatusMovedPermanently, "/login")
+			Login(c)
 		} else {
-			c.Redirect(http.StatusMovedPermanently, "/application/welcome")
+			Welcome(c)
 		}
 
 	} else {
-		c.Redirect(http.StatusMovedPermanently, "/login")
+		Login(c)
 	}
 }
 
