@@ -11,6 +11,8 @@ import (
 )
 
 var userkey = "shipreporting-session"
+var token string
+var pt *string
 
 // AuthRequired middleware for restricted content
 var AuthRequired = func(c *gin.Context) {
@@ -41,22 +43,24 @@ var ProcessAuth = func(c *gin.Context) (int, string) {
 
 	token, err := auth.ReadTokenAuth(username, password)
 
+	pt = &token
+
 	if err != nil {
-		return http.StatusUnauthorized, "Not authorized"
+		return http.StatusUnauthorized, "Credentials error - Not authorized"
 	}
 
 	if len(token) == 0 {
-		return http.StatusUnauthorized, "Not authorized"
+		return http.StatusUnauthorized, "Token error - Not authorized"
 	}
 
-	return http.StatusOK, token
+	return http.StatusOK, "Authorized"
 }
 
 // CreateSession build session
-var CreateSession = func(c *gin.Context, token string) bool {
+var CreateSession = func(c *gin.Context) bool {
 	session := sessions.Default(c)
 
-	session.Set(userkey, token)
+	session.Set(userkey, *pt)
 
 	if err := session.Save(); err != nil {
 		log.Println(err)

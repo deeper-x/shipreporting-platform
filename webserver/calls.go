@@ -15,10 +15,10 @@ var Login = func(c *gin.Context) {
 
 // Enter present auth form
 var Enter = func(c *gin.Context) {
-	status, token := ProcessAuth(c)
+	status, _ := ProcessAuth(c)
 
 	if status == http.StatusOK {
-		created := CreateSession(c, token)
+		created := CreateSession(c)
 
 		if !created {
 			c.Redirect(http.StatusMovedPermanently, "/login")
