@@ -1,11 +1,21 @@
 package webserver
 
 import (
+	"log"
 	"net/http"
 	"os"
 
+	"github.com/deeper-x/shipreporting-platform/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
+
+func init() {
+	err := godotenv.Load(utils.DotenvFile)
+	if err != nil {
+		log.Println(err)
+	}
+}
 
 // Login form presentation
 var Login = func(c *gin.Context) {
@@ -50,7 +60,6 @@ var Logout = func(c *gin.Context) {
 
 // MooringNow call for currently moored
 var MooringNow = func(c *gin.Context) {
-
 	c.HTML(http.StatusOK, "mooring_now", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
