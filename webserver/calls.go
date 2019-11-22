@@ -2,6 +2,7 @@ package webserver
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -49,63 +50,64 @@ var Logout = func(c *gin.Context) {
 
 // MooringNow call for currently moored
 var MooringNow = func(c *gin.Context) {
+
 	c.HTML(http.StatusOK, "mooring_now", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }
 
 // AnchoredNow call for currently anchored
 var AnchoredNow = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "anchored_now", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }
 
 // ArrivalsToday call for arrivals today
 var ArrivalsToday = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "arrivals_today", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }
 
 // DeparturesToday call for departures today
 var DeparturesToday = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "departures_today", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }
 
 // ArrivalPrevisionsNow call for arrival previsions active
 var ArrivalPrevisionsNow = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "arrival_previsions_now", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }
 
 // ShippedGoodsToday todo doc
 var ShippedGoodsToday = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "shipped_goods_today", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }
 
 // TrafficListToday call for today ro/ro pax
 var TrafficListToday = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "traffic_list_today", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }
 
 // ShiftingPrevisionsNow call for arrival previsions active
 var ShiftingPrevisionsNow = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "shifting_previsions_now", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }
 
 // DeparturePrevisionsNow call for arrival previsions active
 var DeparturePrevisionsNow = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "departure_previsions_now", gin.H{
-		"data": "ok",
+		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
 }

@@ -39,7 +39,7 @@
   new agGrid.Grid(eGridDiv, gridOptions)
 
   
-  agGrid.simpleHttpRequest({url: 'http://80.88.88.162:8000/shippedGoodsToday/28'}).then(function(data) {
+  agGrid.simpleHttpRequest({url: '{{.SHIPFLOW_SERVER}}/shippedGoodsToday/28'}).then(function(data) {
       gridOptions.api.setRowData(data);
   });
 

@@ -24,7 +24,7 @@ func TestParameters(t *testing.T) {
 		t.Error(err)
 	}
 
-	if exist, err := ResExist(EnvFile); !exist {
+	if exist, err := ResExist(DotenvFile); !exist {
 		t.Error(err)
 	}
 }
