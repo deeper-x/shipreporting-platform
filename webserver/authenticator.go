@@ -40,7 +40,13 @@ var ProcessAuth = func(c *gin.Context) (int, string) {
 		return http.StatusBadRequest, "Empty credentials"
 	}
 
-	token, err := auth.ReadTokenAuth(username, password)
+	resp, err := auth.SignOn(username, password)
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	token, err := auth.ReadTokenAuth(resp)
 
 	pt = &token
 

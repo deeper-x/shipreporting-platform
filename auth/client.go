@@ -7,8 +7,8 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/deeper-x/shipreporting-platform/utils"
+	"github.com/joho/godotenv"
 )
 
 // Credential response token data
@@ -16,32 +16,35 @@ type Credential struct {
 	Token string `json:"token"`
 }
 
-// ReadTokenAuth get auth data from server
-func ReadTokenAuth(username string, password string) (string, error) {
-	
+var cr = new(Credential)
+
+// SignOn perform remote auth
+func SignOn(username string, password string) (*http.Response, error) {
 	err := godotenv.Load(utils.DotenvFile)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	cr := new(Credential)
-
 	resp, err := http.PostForm(os.Getenv("GET_TOKEN_URL"), url.Values{"username": {username}, "password": {password}})
 
 	if err != nil {
 		log.Println(err)
-		return "no data", err
+		return nil, err
 	}
 
-	defer resp.Body.Close()
+	return resp, nil
+}
 
-	// req.Header.Set("Authorization", "Token ac772f9ebdb24b3b3399c30d82a63f56c808d070")
+// ReadTokenAuth get auth data from server
+func ReadTokenAuth(data *http.Response) (string, error) {
 
-	if err := json.NewDecoder(resp.Body).Decode(&cr); err != nil {
+	if err := json.NewDecoder(data.Body).Decode(&cr); err != nil {
 		log.Println(err)
-		return "no data", err
+		return "empty", err
 	}
+
+	defer data.Body.Close()
 
 	return cr.Token, nil
 }
