@@ -1,11 +1,13 @@
 package webserver
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/deeper-x/shipreporting-platform/utils"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -60,6 +62,9 @@ var Logout = func(c *gin.Context) {
 
 // MooringNow call for currently moored
 var MooringNow = func(c *gin.Context) {
+	session := sessions.Default(c)
+
+	fmt.Println(session.Get(userkey))
 	c.HTML(http.StatusOK, "mooring_now", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
 	})
