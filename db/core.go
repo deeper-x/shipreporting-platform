@@ -7,6 +7,7 @@ import (
 
 	"github.com/deeper-x/shipreporting-platform/utils"
 	"github.com/joho/godotenv"
+
 	// pq lib as a blank import
 	_ "github.com/lib/pq"
 )
