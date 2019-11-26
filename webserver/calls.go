@@ -1,7 +1,6 @@
 package webserver
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -63,10 +62,11 @@ var Logout = func(c *gin.Context) {
 // MooringNow call for currently moored
 var MooringNow = func(c *gin.Context) {
 	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
 
-	fmt.Println(session.Get(userkey))
 	c.HTML(http.StatusOK, "mooring_now", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
 

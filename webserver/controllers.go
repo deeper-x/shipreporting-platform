@@ -8,7 +8,7 @@ import (
 // Route todo doc - Test delegate to Integration Testing
 func (i *Instance) Route() {
 	store := cookie.NewStore([]byte("secret"))
-	i.Engine.Use(sessions.Sessions(userkey, store))
+	i.Engine.Use(sessions.Sessions(sessionKey, store))
 
 	i.Engine.GET("/login", Login)
 	i.Engine.GET("/logout", Logout)

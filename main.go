@@ -8,5 +8,4 @@ var inst = webserver.Instance{}
 
 func main() {
 	webserver.Run(&inst)
-
 }

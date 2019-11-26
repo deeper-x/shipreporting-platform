@@ -24,7 +24,7 @@ type Instance struct {
 // LoadSession load session middleware
 func (i *Instance) LoadSession() {
 	store := cookie.NewStore([]byte("secret"))
-	i.Engine.Use(sessions.Sessions(userkey, store))
+	i.Engine.Use(sessions.Sessions(sessionKey, store))
 }
 
 // EngineBuild todo doc
