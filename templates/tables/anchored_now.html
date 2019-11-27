@@ -86,7 +86,7 @@
   new agGrid.Grid(eGridDiv, gridOptions)
 
   
-  agGrid.simpleHttpRequest({url: '{{.SHIPFLOW_SERVER}}/anchored/27'}).then(function(data) {
+  agGrid.simpleHttpRequest({url: '{{.SHIPFLOW_SERVER}}/anchored/{{.portinformer}}'}).then(function(data) {
       gridOptions.api.setRowData(data);
   });
 

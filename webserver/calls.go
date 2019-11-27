@@ -72,56 +72,88 @@ var MooringNow = func(c *gin.Context) {
 
 // AnchoredNow call for currently anchored
 var AnchoredNow = func(c *gin.Context) {
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
 	c.HTML(http.StatusOK, "anchored_now", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
 
 // ArrivalsToday call for arrivals today
 var ArrivalsToday = func(c *gin.Context) {
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
 	c.HTML(http.StatusOK, "arrivals_today", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
 
 // DeparturesToday call for departures today
 var DeparturesToday = func(c *gin.Context) {
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
 	c.HTML(http.StatusOK, "departures_today", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
 
 // ArrivalPrevisionsNow call for arrival previsions active
 var ArrivalPrevisionsNow = func(c *gin.Context) {
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
 	c.HTML(http.StatusOK, "arrival_previsions_now", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
 
 // ShippedGoodsToday todo doc
 var ShippedGoodsToday = func(c *gin.Context) {
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
 	c.HTML(http.StatusOK, "shipped_goods_today", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
 
 // TrafficListToday call for today ro/ro pax
 var TrafficListToday = func(c *gin.Context) {
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
 	c.HTML(http.StatusOK, "traffic_list_today", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
 
 // ShiftingPrevisionsNow call for arrival previsions active
 var ShiftingPrevisionsNow = func(c *gin.Context) {
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
 	c.HTML(http.StatusOK, "shifting_previsions_now", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
 
 // DeparturePrevisionsNow call for arrival previsions active
 var DeparturePrevisionsNow = func(c *gin.Context) {
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
 	c.HTML(http.StatusOK, "departure_previsions_now", gin.H{
 		"SHIPFLOW_SERVER": os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":    portinformer,
 	})
 }
