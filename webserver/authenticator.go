@@ -16,9 +16,6 @@ var portinformer = "portinformer"
 var token string
 var ptoken *string
 
-var connector = db.Connector()
-var repository = db.Repository{Conn: connector}
-
 // AuthRequired middleware for restricted content
 var AuthRequired = func(c *gin.Context) {
 	session := sessions.Default(c)
@@ -35,8 +32,8 @@ var AuthRequired = func(c *gin.Context) {
 
 // ProcessAuth auth processing
 var ProcessAuth = func(c *gin.Context) (int, string) {
-	username := c.PostForm("username")
-	password := c.PostForm("password")
+	username := c.PostForm("user")
+	password := c.PostForm("pass")
 
 	lenUsername := len(strings.Trim(username, " "))
 	lenPassword := len(strings.Trim(password, " "))
@@ -68,6 +65,9 @@ var ProcessAuth = func(c *gin.Context) (int, string) {
 
 // CreateSession build session
 var CreateSession = func(c *gin.Context) bool {
+	connector := db.Connector()
+	repository := db.Repository{Conn: connector}
+
 	session := sessions.Default(c)
 
 	userID := GetUserID(repository, *ptoken)

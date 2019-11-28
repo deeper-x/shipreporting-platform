@@ -54,7 +54,7 @@ var Welcome = func(c *gin.Context) {
 var Logout = func(c *gin.Context) {
 	status, message := DestroySession(c)
 
-	c.HTML(status, "login", gin.H{
+	c.HTML(status, "logout", gin.H{
 		"data": message,
 	})
 }
