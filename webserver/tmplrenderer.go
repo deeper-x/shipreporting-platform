@@ -6,8 +6,8 @@ import (
 )
 
 var paths = map[string]string{
-	"loginPath":             utils.FullPath("/templates/Login/login.html"),
-	"logoutPath":            utils.FullPath("/templates/Login/logout.html"),
+	"loginPath":             utils.FullPath("/templates/layout/theme/classic/assets/Login/login.html"),
+	"logoutPath":            utils.FullPath("/templates/layout/theme/classic/assets/Login/logout.html"),
 	"indexPath":             utils.FullPath("/templates/layout/theme/classic/default/index.html"),
 	"welcomePath":           utils.FullPath("/templates/layout/theme/classic/default/welcome.html"),
 	"mooringPath":           utils.FullPath("/templates/tables/mooring_now.html"),
