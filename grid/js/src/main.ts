@@ -3,16 +3,30 @@ const secondElem = 1;
 const thirdElem = 2;
 const notFound = -1;
 
-export const getYear = (value: string): number => {
-    return Number(value.split("-")[firstElem]);
+export const getYear = (value: string): number|string => {
+    if (value){
+        return Number(value.split("-")[firstElem]);    
+    } else {
+        return "";
+    }
 }
 
-export const getMonth = (value: string): number => {
-    return Number(value.split("-")[secondElem]);
+export const getMonth = (value: string): number|string => {
+    if (value){
+        return Number(value.split("-")[secondElem]);
+    } else {
+        return "";
+    }
+        
 }
 
-export const getDay = (value: string): number => {
-    return Number(value.split("-")[thirdElem].substr(firstElem,thirdElem));
+export const getDay = (value: string): number|string => {
+    if (value){
+        return Number(value.split("-")[thirdElem].substr(firstElem,thirdElem));
+    } else {
+        return "";
+    }
+        
 }
 
 export const getHour = (value: string): number => {

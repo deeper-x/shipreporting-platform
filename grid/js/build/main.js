@@ -3,13 +3,28 @@ var secondElem = 1;
 var thirdElem = 2;
 var notFound = -1;
 export var getYear = function (value) {
-    return Number(value.split("-")[firstElem]);
+    if (value) {
+        return Number(value.split("-")[firstElem]);
+    }
+    else {
+        return "";
+    }
 };
 export var getMonth = function (value) {
-    return Number(value.split("-")[secondElem]);
+    if (value) {
+        return Number(value.split("-")[secondElem]);
+    }
+    else {
+        return "";
+    }
 };
 export var getDay = function (value) {
-    return Number(value.split("-")[thirdElem].substr(firstElem, thirdElem));
+    if (value) {
+        return Number(value.split("-")[thirdElem].substr(firstElem, thirdElem));
+    }
+    else {
+        return "";
+    }
 };
 export var getHour = function (value) {
     if (value.indexOf("T") != notFound) {
