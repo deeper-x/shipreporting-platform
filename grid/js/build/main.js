@@ -3,7 +3,7 @@ var secondElem = 1;
 var thirdElem = 2;
 var notFound = -1;
 export var getYear = function (value) {
-    if (!value) {
+    if (value) {
         return Number(value.split("-")[firstElem]);
     }
     else {
@@ -11,7 +11,7 @@ export var getYear = function (value) {
     }
 };
 export var getMonth = function (value) {
-    if (!value) {
+    if (value) {
         return Number(value.split("-")[secondElem]);
     }
     else {
@@ -19,7 +19,7 @@ export var getMonth = function (value) {
     }
 };
 export var getDay = function (value) {
-    if (!value) {
+    if (value) {
         return Number(value.split("-")[thirdElem].substr(firstElem, thirdElem));
     }
     else {

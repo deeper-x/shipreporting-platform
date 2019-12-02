@@ -4,7 +4,7 @@ const thirdElem = 2;
 const notFound = -1;
 
 export const getYear = (value: string): number|string => {
-    if (!value){
+    if (value){
         return Number(value.split("-")[firstElem]);    
     } else {
         return "";
@@ -12,7 +12,7 @@ export const getYear = (value: string): number|string => {
 }
 
 export const getMonth = (value: string): number|string => {
-    if (!value){
+    if (value){
         return Number(value.split("-")[secondElem]);
     } else {
         return "";
@@ -21,7 +21,7 @@ export const getMonth = (value: string): number|string => {
 }
 
 export const getDay = (value: string): number|string => {
-    if (!value){
+    if (value){
         return Number(value.split("-")[thirdElem].substr(firstElem,thirdElem));
     } else {
         return "";
