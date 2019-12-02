@@ -31,6 +31,9 @@ export var getHour = function (value) {
         var hhmm = value.split("T")[secondElem];
         return Number(hhmm.split(":")[firstElem]);
     }
+    else if (!value) {
+        return "";
+    }
     else {
         var hhmm = value.split(" ")[secondElem];
         return Number(hhmm.split(":")[firstElem]);
@@ -40,6 +43,9 @@ export var getMinute = function (value) {
     if (value.indexOf("T") != notFound) {
         var hhmm = value.split("T")[secondElem];
         return Number(hhmm.split(":")[secondElem]);
+    }
+    else if (!value) {
+        return "";
     }
     else {
         var hhmm = value.split(" ")[secondElem];

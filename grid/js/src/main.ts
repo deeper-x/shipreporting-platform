@@ -29,10 +29,12 @@ export const getDay = (value: string): number|string => {
         
 }
 
-export const getHour = (value: string): number => {
+export const getHour = (value: string): number|string => {
     if (value.indexOf("T") != notFound) {
         const hhmm = value.split("T")[secondElem];
         return Number(hhmm.split(":")[firstElem]);
+    } else if (!value) {
+        return "";
     } else {
         const hhmm = value.split(" ")[secondElem];
         return Number(hhmm.split(":")[firstElem]);
@@ -40,10 +42,12 @@ export const getHour = (value: string): number => {
         
 }
 
-export const getMinute = (value: string): number => {
+export const getMinute = (value: string): number|string => {
     if (value.indexOf("T") != notFound) {
         const hhmm = value.split("T")[secondElem];
         return Number(hhmm.split(":")[secondElem]);
+    } else if (!value) {
+        return "";
     } else {
         const hhmm = value.split(" ")[secondElem];
         return Number(hhmm.split(":")[secondElem]);
