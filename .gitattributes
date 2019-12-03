@@ -1,4 +1,2 @@
-*.go linguist-language=Go
 *.css linguist-vendored
-*.css linguist-detectable=false
 *.go linguist-detectable=true
