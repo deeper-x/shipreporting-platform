@@ -1,4 +1,4 @@
+*.go linguist-language=Go
 *.css linguist-vendored
 *.html linguist-vendored
 *.js linguist-vendored
-*.go linguist-language=Golang
