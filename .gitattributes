@@ -1,4 +1,4 @@
-*.go linguist-language=golang
+*.go linguist-language=Go
 *.html linguist-detectable=false
 *.css linguist-detectable=false
 *.js linguist-detectable=false
