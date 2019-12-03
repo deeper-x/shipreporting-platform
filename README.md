@@ -3,12 +3,13 @@
 [![CircleCI](https://circleci.com/gh/deeper-x/shipreporting-platform.svg?style=svg)](https://circleci.com/gh/deeper-x/shipreporting-platform)
 ![Actions Badge](https://github.com/deeper-x/shipreporting-platform/workflows/Go/badge.svg)
 
-## USER TOKEN GENERATION
+## USER TOKEN GENERATION (Application server)
 
-`bash
-$ cd <shipflow_home>
-$ pipenv shell
-$ python manage drf_create_token <USERNAME>`
+```bash
+cd <shipflow_home>
+pipenv shell
+python manage drf_create_token <USERNAME>
+```
 
 ## ACTIVE SERVICES
 
@@ -22,13 +23,6 @@ $ python manage drf_create_token <USERNAME>`
 - Shipped goods
 - Traffic list
 - Shifting previsions
-
-### Install
-```bash
-
-
-```
-
 
 ### Systemd configuration
 
@@ -51,5 +45,12 @@ Restart=on-failure
 WantedBy=multi-user.target
 
 HEREDOC
-
   ```
+
+### Install & Run instance
+
+```bash
+go get -d ./...
+go build -o ${GOBIN}
+sudo systemctl restart shipreporting-platform
+```
