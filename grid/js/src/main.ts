@@ -54,3 +54,9 @@ export const getMinute = (value: string): number|string => {
     }
 }
 
+
+export const buildGrid = (uri: string, gridOptions: object) => {    
+    agGrid.simpleHttpRequest({url: uri}).then(function(data) {
+          gridOptions.api.setRowData(data);
+    });
+};

@@ -52,3 +52,8 @@ export var getMinute = function (value) {
         return Number(hhmm.split(":")[secondElem]);
     }
 };
+export var buildGrid = function (uri, gridOptions) {
+    agGrid.simpleHttpRequest({ url: uri }).then(function (data) {
+        gridOptions.api.setRowData(data);
+    });
+};

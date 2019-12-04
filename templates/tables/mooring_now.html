@@ -3,7 +3,7 @@
 <div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
 <script type="module" charset="utf-8">
 
-    import {getDay, getMonth, getYear, getHour, getMinute} from '../grid/js/build/main.js';
+    import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/build/main.js';
     // specify the columns
     var columnDefs = [
       {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
@@ -70,22 +70,22 @@
       },
 ];
 
-    // let the grid know which columns to use
-    var gridOptions = {
-      columnDefs: columnDefs
-    };
+var eGridDiv = document.querySelector('#myGrid');
 
-  // lookup the container we want the Grid to use
-  var eGridDiv = document.querySelector('#myGrid');
+// let the grid know which columns to use
+var gridOptions = {
+    columnDefs: columnDefs
+};
 
-  // create the grid passing in the div to use together with the columns & data we want to use
-  new agGrid.Grid(eGridDiv, gridOptions)
+// create the grid passing in the div to use together with the columns & data we want to use
+new agGrid.Grid(eGridDiv, gridOptions)
 
-  
-  agGrid.simpleHttpRequest({url: '{{.SHIPFLOW_SERVER}}/moored/{{.portinformer}}'}).then(function(data) {
-      gridOptions.api.setRowData(data);
-  });
+// lookup the container we want the Grid to use        
+var uri = "".concat({{.SHIPFLOW_SERVER}}, "/moored/", {{.portinformer}});
 
+window.setInterval(()=>{
+  buildGrid(uri, gridOptions);
+}, 60000);
 
 </script>
 
