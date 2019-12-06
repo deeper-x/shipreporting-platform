@@ -39,9 +39,15 @@
   new agGrid.Grid(eGridDiv, gridOptions)
 
   
-  agGrid.simpleHttpRequest({url: '{{.SHIPFLOW_SERVER}}/shippedGoodsToday/{{.portinformer}}'}).then(function(data) {
-      gridOptions.api.setRowData(data);
-  });
+  // lookup the container we want the Grid to use        
+  var uri = "".concat({{.SHIPFLOW_SERVER}}, "/shippedGoodsToday/", {{.portinformer}});
+  
+  buildGrid(uri, gridOptions);
+
+  window.setInterval(()=>{
+    Pace.restart();
+    buildGrid(uri, gridOptions);
+  }, 60000);
 
 
 </script>

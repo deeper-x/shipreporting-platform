@@ -98,6 +98,24 @@ var AnchoredNow = func(c *gin.Context) {
 	})
 }
 
+// ActiveNow currently open trips
+var ActiveNow = func(c *gin.Context) {
+	conn := db.Connector()
+	repo := db.NewRepository(conn)
+	defer repo.Close()
+
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+	portinformerName := repo.SelectPortinformerName(portinformer)
+
+	c.HTML(http.StatusOK, "active_now", gin.H{
+		"SHIPFLOW_SERVER":  os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":     portinformer,
+		"pageName":         "Open trips",
+		"portinformerName": portinformerName,
+	})
+}
+
 // ArrivalsToday call for arrivals today
 var ArrivalsToday = func(c *gin.Context) {
 	conn := db.Connector()

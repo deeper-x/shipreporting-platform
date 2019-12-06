@@ -3,7 +3,7 @@
 <div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
 <script type="module" charset="utf-8">
 
-    import {getDay, getMonth, getYear, getHour, getMinute} from '../grid/js/build/main.js';
+    import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/build/main.js';
     // specify the columns
     var columnDefs = [
       {headerName: "Ship", field: "ship", filter: "agTextColumnFilter" },
@@ -79,9 +79,15 @@
   new agGrid.Grid(eGridDiv, gridOptions)
 
   
-  agGrid.simpleHttpRequest({url: '{{.SHIPFLOW_SERVER}}/arrivalPrevisions/{{.portinformer}}'}).then(function(data) {
-      gridOptions.api.setRowData(data);
-  });
+  // lookup the container we want the Grid to use        
+  var uri = "".concat({{.SHIPFLOW_SERVER}}, "/arrivalPrevisions/", {{.portinformer}});
+  
+  buildGrid(uri, gridOptions);
+
+  window.setInterval(()=>{
+    Pace.restart();
+    buildGrid(uri, gridOptions);
+  }, 60000);
 
 
 </script>

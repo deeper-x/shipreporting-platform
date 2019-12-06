@@ -19,6 +19,7 @@ var paths = map[string]string{
 	"trafficListTodayPath":  utils.FullPath("/templates/tables/traffic_list_today.html"),
 	"shiftingPrevNowPath":   utils.FullPath("/templates/tables/shifting_previsions_now.html"),
 	"departurePrevNowPath":  utils.FullPath("/templates/tables/departure_previsions_now.html"),
+	"activeNowPath":         utils.FullPath("/templates/tables/active_now.html"),
 }
 
 // multiRenderer todo doc
@@ -44,7 +45,7 @@ func multiRenderer() (bool, multitemplate.Renderer) {
 	r.AddFromFiles("traffic_list_today", paths["indexPath"], paths["trafficListTodayPath"])
 	r.AddFromFiles("shifting_previsions_now", paths["indexPath"], paths["shiftingPrevNowPath"])
 	r.AddFromFiles("departure_previsions_now", paths["indexPath"], paths["departurePrevNowPath"])
-
+	r.AddFromFiles("active_now", paths["indexPath"], paths["activeNowPath"])
 	return true, r
 }
 

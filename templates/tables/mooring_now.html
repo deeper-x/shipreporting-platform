@@ -83,7 +83,10 @@ new agGrid.Grid(eGridDiv, gridOptions)
 // lookup the container we want the Grid to use        
 var uri = "".concat({{.SHIPFLOW_SERVER}}, "/moored/", {{.portinformer}});
 
+buildGrid(uri, gridOptions);
+
 window.setInterval(()=>{
+  Pace.restart();
   buildGrid(uri, gridOptions);
 }, 60000);
 

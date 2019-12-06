@@ -27,6 +27,7 @@ func (i *Instance) Route() {
 		private.GET("/traffic_list_today", TrafficListToday)
 		private.GET("/shifting_previsions_now", ShiftingPrevisionsNow)
 		private.GET("/departure_previsions_now", DeparturePrevisionsNow)
+		private.GET("/active_now", ActiveNow)
 	}
 
 }
