@@ -3,9 +3,10 @@ package db
 import "log"
 
 // SelectUserID todo doc
-func (r Repository) SelectUserID(token string) string {
+func (r Repository) SelectUserID(token string) (string, bool) {
 	var key = ""
 	var result string
+	var exists = false
 
 	rows, err := r.Conn.Query("SELECT user_id FROM authtoken_token WHERE key = $1 LIMIT 1", token)
 
@@ -17,10 +18,11 @@ func (r Repository) SelectUserID(token string) string {
 		if err := rows.Scan(&key); err != nil {
 			log.Fatal(err)
 		}
+		exists = true
 		result = key
 	}
 
-	return result
+	return result, exists
 }
 
 // SelectUserPortinformer todo doc

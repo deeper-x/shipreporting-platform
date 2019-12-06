@@ -22,16 +22,16 @@ func init() {
 // Login form presentation
 var Login = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "login", gin.H{
-		"data": "ok",
+		"loginMessage": "Welcome",
 	})
 }
 
 // Enter present auth form
 var Enter = func(c *gin.Context) {
-	status, _ := ProcessAuth(c)
+	status, token := ProcessAuth(c)
 
-	if status == http.StatusOK {
-		created := CreateSession(c)
+	if status {
+		created := CreateSession(c, token)
 
 		if !created {
 			Login(c)
@@ -47,7 +47,7 @@ var Enter = func(c *gin.Context) {
 // Welcome render a landing page
 var Welcome = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "welcome", gin.H{
-		"data": "ok",
+		"loginMessage": "Please insert user&pass",
 	})
 }
 

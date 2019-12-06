@@ -19,19 +19,20 @@ var ptoken *string
 // AuthRequired middleware for restricted content
 var AuthRequired = func(c *gin.Context) {
 	session := sessions.Default(c)
-	user := session.Get(sessionKey)
+	sessionIn := session.Get(sessionKey)
 
-	if user == nil {
+	if sessionIn == nil {
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})
 	}
+
 	return
 
 	// Continue down the chain to handler etc
-	c.Next()
+	// c.Next()
 }
 
 // ProcessAuth auth processing
-var ProcessAuth = func(c *gin.Context) (int, string) {
+var ProcessAuth = func(c *gin.Context) (bool, string) {
 	username := c.PostForm("user")
 	password := c.PostForm("pass")
 
@@ -39,7 +40,7 @@ var ProcessAuth = func(c *gin.Context) (int, string) {
 	lenPassword := len(strings.Trim(password, " "))
 
 	if lenUsername == 0 || lenPassword == 0 {
-		return http.StatusBadRequest, "Empty credentials"
+		return false, "Empty credentials"
 	}
 
 	resp, err := auth.SignOn(username, password)
@@ -48,47 +49,54 @@ var ProcessAuth = func(c *gin.Context) (int, string) {
 		log.Println(err)
 	}
 
+	if resp.StatusCode != http.StatusOK {
+		return false, "not authorized"
+	}
+
 	token, err := auth.ReadTokenAuth(resp)
 
-	ptoken = &token
-
 	if err != nil {
-		return http.StatusUnauthorized, "Credentials error - Not authorized"
+		return false, "Credentials error - Not authorized"
 	}
 
-	if len(token) == 0 {
-		return http.StatusUnauthorized, "Token error - Not authorized"
+	if len(token) > 0 {
+		return true, token
 	}
 
-	return http.StatusOK, "Authorized"
+	return false, ""
+
 }
 
 // CreateSession build session
-var CreateSession = func(c *gin.Context) bool {
+var CreateSession = func(c *gin.Context, token string) bool {
 	connector := db.Connector()
 	repository := db.Repository{Conn: connector}
 
 	session := sessions.Default(c)
 
-	userID := GetUserID(repository, *ptoken)
-	portinformer := GetManagedPortinformer(repository, userID)
+	userID, exists := GetUserID(repository, token)
 
-	session.Set(portinformer, userID)
-	session.Set(sessionKey, *ptoken)
-	session.Set("managedPortinformer", portinformer)
+	if exists {
+		portinformer := GetManagedPortinformer(repository, userID)
 
-	repository.Close()
+		session.Set(portinformer, userID)
+		session.Set(sessionKey, token)
+		session.Set("managedPortinformer", portinformer)
 
-	if err := session.Save(); err != nil {
-		log.Println(err)
-		return false
+		if err := session.Save(); err != nil {
+			log.Println(err)
+		}
+
+		repository.Close()
+
+		return true
 	}
 
-	return true
+	return false
 }
 
 // GetUserID retrive user id from auth token
-var GetUserID = func(repo db.Repository, authToken string) string {
+var GetUserID = func(repo db.Repository, authToken string) (string, bool) {
 	return repo.SelectUserID(authToken)
 }
 
@@ -105,7 +113,10 @@ var DestroySession = func(c *gin.Context) (int, string) {
 	if user == nil {
 		return http.StatusBadRequest, "Invalid session token"
 	}
+
 	session.Delete(sessionKey)
+	session.Delete(portinformer)
+	session.Delete("managedPortinformer")
 
 	if err := session.Save(); err != nil {
 		return http.StatusInternalServerError, "Failed to store session"

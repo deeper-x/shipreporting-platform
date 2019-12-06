@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 
 	"github.com/deeper-x/shipreporting-platform/utils"
 	"github.com/joho/godotenv"
@@ -26,22 +27,31 @@ func SignOn(username string, password string) (*http.Response, error) {
 		log.Fatal(err)
 	}
 
-	resp, err := http.PostForm(os.Getenv("GET_TOKEN_URL"), url.Values{"username": {username}, "password": {password}})
+	// resp, err := http.PostForm(os.Getenv("GET_TOKEN_URL"), url.Values{"username": {username}, "password": {password}})
 
-	if err != nil {
-		log.Println(err)
-		return nil, err
-	}
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	return resp, nil
+	data := url.Values{}
+	data.Set("username", username)
+	data.Set("password", password)
+
+	client := &http.Client{}
+
+	req, err := http.NewRequest("POST", os.Getenv("GET_TOKEN_URL"), strings.NewReader(data.Encode()))
+
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	resp, err := client.Do(req)
+
+	return resp, err
 }
 
 // ReadTokenAuth get auth data from server
 func ReadTokenAuth(data *http.Response) (string, error) {
-
 	if err := json.NewDecoder(data.Body).Decode(&cr); err != nil {
-		log.Println(err)
-		return "empty", err
+		return "", err
 	}
 
 	defer data.Body.Close()
