@@ -11,7 +11,7 @@ func TestReadTokenAuth(t *testing.T) {
 	mockResponse := rr.Result()
 	msg, _ := ReadTokenAuth(mockResponse)
 
-	if msg != "empty" {
+	if msg != "" {
 		t.Fail()
 	}
 }

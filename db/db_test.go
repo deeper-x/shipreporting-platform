@@ -24,9 +24,9 @@ func TestSelectUserID(t *testing.T) {
 
 	r := Repository{Conn: db}
 
-	rows := r.SelectUserID("ac772f9ebdb24b3b3399c30d82a63f56c808d070")
+	_, ok := r.SelectUserID("ac772f9ebdb24b3b3399c30d82a63f56c808d070")
 
-	assert.Equal(t, rows, "7")
+	assert.True(t, ok)
 }
 
 func TestSelectUserPortinformer(t *testing.T) {
