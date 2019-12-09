@@ -27,6 +27,7 @@ func SignOn(username string, password string) (*http.Response, error) {
 		log.Fatal(err)
 	}
 
+	// MORE CONCISE:
 	// resp, err := http.PostForm(os.Getenv("GET_TOKEN_URL"), url.Values{"username": {username}, "password": {password}})
 
 	// if err != nil {

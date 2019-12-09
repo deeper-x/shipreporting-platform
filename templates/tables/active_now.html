@@ -1,24 +1,31 @@
 {{ define "main_content" }}
 
-<div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
+<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
 <script type="module" charset="utf-8">
 
     import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/build/main.js';
     // specify the columns
     var columnDefs = [
-      {headerName: "id", field: "id_control_unit_data", width: 60, filter: "agNumberColumnFilter"},
-      {headerName: "Ship", field: "ship_name", width:120, filter: "agTextColumnFilter" },
-      {headerName: "Type", field: "ship_type", width: 220, filter: "agTextColumnFilter"},
-      {headerName: "Activity", width: 120, field: "current_activity"},
+      {headerName: "ID", field: "id_control_unit_data", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "Ship", field: "ship_name", width:150, filter: "agTextColumnFilter" },
+      {headerName: "Type", field: "ship_type", width: 150, filter: "agTextColumnFilter"},
+      {headerName: "GT", field: "gross_tonnage", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "NT", field: "net_tonnage", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "Width", field: "width", width: 80, filter: "agNumberColumnFilter"},
+      {headerName: "Length", field: "length", width: 80, filter: "agNumberColumnFilter"},
+
+      {headerName: "Status", width: 120, field: "current_activity"},
       {
         headerName: "Timestamp", 
-        width: 160, 
+        width: 130, 
         field: "timestamp",
         valueGetter: (value) => {
           return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("HH:mm DD/MM/YYYY")
           
         }
-      }
+      },
+      {headerName: "Shipping", width: 600, field: "shipping", filter: "agTextColumnFilter"},
+
 ];
 
 var eGridDiv = document.querySelector('#myGrid');

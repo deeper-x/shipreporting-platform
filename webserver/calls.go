@@ -28,26 +28,33 @@ var Login = func(c *gin.Context) {
 
 // Enter present auth form
 var Enter = func(c *gin.Context) {
+	// Step 1: Ask for token to auth webservice
 	status, token := ProcessAuth(c)
 
+	// Step 2: Auth is granted?
 	if status {
+		// Step 2A: try to build the session (w/ data)
 		created := CreateSession(c, token)
 
+		// Step 2B: Verify session is built successfully
 		if !created {
+			// Step 2B-1: Something get wrong, bounce to login page
 			Login(c)
 		} else {
+			// Step 2B-2: Success. Go to welcome page
 			ActiveNow(c)
 		}
 
 	} else {
+		// Step 2C: remote WS denied access. Bounce to login
 		Login(c)
 	}
 }
 
-// Welcome render a landing page
+// Welcome render a landing/access page
 var Welcome = func(c *gin.Context) {
 	c.HTML(http.StatusOK, "welcome", gin.H{
-		"loginMessage": "Please insert user&pass",
+		"message": "welcome",
 	})
 }
 
