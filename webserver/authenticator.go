@@ -14,7 +14,6 @@ import (
 var sessionKey = "shipreporting-session"
 var portinformer = "portinformer"
 var token string
-var ptoken *string
 
 // AuthRequired middleware for restricted content
 var AuthRequired = func(c *gin.Context) {
@@ -27,7 +26,7 @@ var AuthRequired = func(c *gin.Context) {
 
 	return
 
-	// Continue down the chain to handler etc
+	// Continue down the chain
 	// c.Next()
 }
 
@@ -50,6 +49,7 @@ var ProcessAuth = func(c *gin.Context) (bool, string) {
 	}
 
 	if resp.StatusCode != http.StatusOK {
+		// Wrong user / password
 		return false, "not authorized"
 	}
 
@@ -60,11 +60,12 @@ var ProcessAuth = func(c *gin.Context) (bool, string) {
 	}
 
 	if len(token) > 0 {
+		// Authentication
 		return true, token
 	}
 
+	// Default is unauthorized
 	return false, ""
-
 }
 
 // CreateSession build session

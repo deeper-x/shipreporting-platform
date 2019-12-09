@@ -36,7 +36,7 @@ var Enter = func(c *gin.Context) {
 		if !created {
 			Login(c)
 		} else {
-			Welcome(c)
+			ActiveNow(c)
 		}
 
 	} else {
