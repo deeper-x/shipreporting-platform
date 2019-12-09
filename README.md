@@ -24,6 +24,12 @@ python manage drf_create_token <USERNAME>
 - Traffic list
 - Shifting previsions
 
+### Authentication
+System read auth data from remote ws system, then build a session token 
+
+![Auth](https://raw.githubusercontent.com/deeper-x/shipreporting-platform/master/project/auth_system.png)
+
+
 ### Systemd configuration
 
 ```bash
