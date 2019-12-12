@@ -142,6 +142,49 @@ var ArrivalsToday = func(c *gin.Context) {
 	})
 }
 
+// FormArrivalsRegister search form
+var FormArrivalsRegister = func(c *gin.Context) {
+	conn := db.Connector()
+	repo := db.NewRepository(conn)
+	defer repo.Close()
+
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
+	portinformerName := repo.SelectPortinformerName(portinformer)
+
+	c.HTML(http.StatusOK, "form_arrivals_register", gin.H{
+		"SHIPFLOW_SERVER":      os.Getenv("SHIPFLOW_SERVER"),
+		"SHIPREPORTING_SERVER": os.Getenv("SHIPREPORTING_SERVER"),
+		"portinformer":         portinformer,
+		"pageName":             "Arrivals register",
+		"portinformerName":     portinformerName,
+	})
+}
+
+// ArrivalsRegister call for register arrivals
+var ArrivalsRegister = func(c *gin.Context) {
+	conn := db.Connector()
+	repo := db.NewRepository(conn)
+	defer repo.Close()
+
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
+	portinformerName := repo.SelectPortinformerName(portinformer)
+	tsStart := c.Param("ts_start")
+	tsStop := c.Param("ts_stop")
+
+	c.HTML(http.StatusOK, "arrivals_register", gin.H{
+		"SHIPFLOW_SERVER":  os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":     portinformer,
+		"pageName":         "Arrivals register",
+		"portinformerName": portinformerName,
+		"ts_start":         tsStart,
+		"ts_stop":          tsStop,
+	})
+}
+
 // DeparturesToday call for departures today
 var DeparturesToday = func(c *gin.Context) {
 	conn := db.Connector()

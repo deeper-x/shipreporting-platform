@@ -1,0 +1,50 @@
+{{ define "main_content"}}
+
+<div class="row">
+        <div class='col-sm-4'></div>
+        <div class='col-sm-1'>From:</div>
+        <div class='col-sm-3'>
+            <input type='text' class="form-control" id='datetimepicker_from' />
+        </div>
+</div>
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row">
+        <div class='col-sm-4'></div>
+        <div class='col-sm-1'>To:</div>
+        <div class='col-sm-3'>
+            <input type='text' class="form-control" id='datetimepicker_to' />
+        </div>
+</div>
+
+<div class="row">
+    <hr />
+</div>
+
+<div class="row">
+    <div class='col-sm-5'></div>    
+    <div class='col-sm-2'><button id="search_from_to" class="btn btn-bold btn-label-info">Search</button></div>
+    <div class='col-sm-5'></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker_from').datetimepicker();
+    });
+    $(function () {
+        $('#datetimepicker_to').datetimepicker();
+    });
+    $("#search_from_to").on('click', function(){
+        var from = $("#datetimepicker_from").val();
+        var to = $("#datetimepicker_to").val();
+        var url = "".concat({{.SHIPREPORTING_SERVER}}, "/application/arrivals_register/", {{.portinformer}}, "/",  from , "/", to);
+        document.location = url;
+    });
+
+</script>
+				        
+{{ end }}
