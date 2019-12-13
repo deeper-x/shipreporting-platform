@@ -30,6 +30,8 @@ func (i *Instance) Route() {
 		private.GET("/active_now", ActiveNow)
 		private.GET("/form_arrivals_register", FormArrivalsRegister)
 		private.GET("/arrivals_register/:id/:ts_start/:ts_stop", ArrivalsRegister)
+		private.GET("/form_departures_register", FormDeparturesRegister)
+		private.GET("/departures_register/:id/:ts_start/:ts_stop", DeparturesRegister)
 	}
 
 }

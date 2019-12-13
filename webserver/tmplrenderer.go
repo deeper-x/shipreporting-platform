@@ -6,22 +6,24 @@ import (
 )
 
 var paths = map[string]string{
-	"loginPath":                utils.FullPath("/templates/layout/theme/classic/assets/Login/login.html"),
-	"logoutPath":               utils.FullPath("/templates/layout/theme/classic/assets/Login/logout.html"),
-	"indexPath":                utils.FullPath("/templates/layout/theme/classic/default/index.html"),
-	"welcomePath":              utils.FullPath("/templates/layout/theme/classic/default/welcome.html"),
-	"mooringPath":              utils.FullPath("/templates/tables/mooring_now.html"),
-	"anchoredPath":             utils.FullPath("/templates/tables/anchored_now.html"),
-	"arrivalsTodayPath":        utils.FullPath("/templates/tables/arrivals_today.html"),
-	"departuresTodayPath":      utils.FullPath("/templates/tables/departures_today.html"),
-	"arrivalPrevNowPath":       utils.FullPath("/templates/tables/arrival_previsions_now.html"),
-	"shippedGoodsTodayPath":    utils.FullPath("/templates/tables/shipped_goods_today.html"),
-	"trafficListTodayPath":     utils.FullPath("/templates/tables/traffic_list_today.html"),
-	"shiftingPrevNowPath":      utils.FullPath("/templates/tables/shifting_previsions_now.html"),
-	"departurePrevNowPath":     utils.FullPath("/templates/tables/departure_previsions_now.html"),
-	"activeNowPath":            utils.FullPath("/templates/tables/active_now.html"),
-	"arrivalsRegisterPath":     utils.FullPath("/templates/tables/arrivals_register.html"),
-	"formArrivalsRegisterPath": utils.FullPath("/templates/tables/form_arrivals_register.html"),
+	"loginPath":                  utils.FullPath("/templates/layout/theme/classic/assets/Login/login.html"),
+	"logoutPath":                 utils.FullPath("/templates/layout/theme/classic/assets/Login/logout.html"),
+	"indexPath":                  utils.FullPath("/templates/layout/theme/classic/default/index.html"),
+	"welcomePath":                utils.FullPath("/templates/layout/theme/classic/default/welcome.html"),
+	"mooringPath":                utils.FullPath("/templates/tables/mooring_now.html"),
+	"anchoredPath":               utils.FullPath("/templates/tables/anchored_now.html"),
+	"arrivalsTodayPath":          utils.FullPath("/templates/tables/arrivals_today.html"),
+	"departuresTodayPath":        utils.FullPath("/templates/tables/departures_today.html"),
+	"arrivalPrevNowPath":         utils.FullPath("/templates/tables/arrival_previsions_now.html"),
+	"shippedGoodsTodayPath":      utils.FullPath("/templates/tables/shipped_goods_today.html"),
+	"trafficListTodayPath":       utils.FullPath("/templates/tables/traffic_list_today.html"),
+	"shiftingPrevNowPath":        utils.FullPath("/templates/tables/shifting_previsions_now.html"),
+	"departurePrevNowPath":       utils.FullPath("/templates/tables/departure_previsions_now.html"),
+	"activeNowPath":              utils.FullPath("/templates/tables/active_now.html"),
+	"formArrivalsRegisterPath":   utils.FullPath("/templates/tables/form_arrivals_register.html"),
+	"arrivalsRegisterPath":       utils.FullPath("/templates/tables/arrivals_register.html"),
+	"formDeparturesRegisterPath": utils.FullPath("/templates/tables/form_departures_register.html"),
+	"departuresRegisterPath":     utils.FullPath("/templates/tables/departures_register.html"),
 }
 
 // multiRenderer todo doc
@@ -54,6 +56,8 @@ func multiRenderer() (bool, multitemplate.Renderer) {
 	// register data
 	r.AddFromFiles("form_arrivals_register", paths["indexPath"], paths["formArrivalsRegisterPath"])
 	r.AddFromFiles("arrivals_register", paths["indexPath"], paths["arrivalsRegisterPath"])
+	r.AddFromFiles("form_departures_register", paths["indexPath"], paths["formDeparturesRegisterPath"])
+	r.AddFromFiles("departures_register", paths["indexPath"], paths["departuresRegisterPath"])
 
 	return true, r
 }

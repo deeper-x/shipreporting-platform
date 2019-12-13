@@ -1,0 +1,49 @@
+{{ define "main_content" }}
+
+<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
+<script type="module" charset="utf-8">
+
+    import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '/grid/js/build/main.js';
+    // specify the columns
+    var columnDefs = [
+      {headerName: "ID", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "Ship", field: "ship_name", width:150, filter: "agTextColumnFilter" },
+      {headerName: "Type", field: "ship_type", width: 150, filter: "agTextColumnFilter"},
+      {headerName: "GT", field: "gross_tonnage", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "NT", field: "net_tonnage", width: 60, filter: "agNumberColumnFilter"},
+      {headerName: "Width", field: "ship_width", width: 80, filter: "agNumberColumnFilter"},
+      {headerName: "Length", field: "ship_length", width: 80, filter: "agNumberColumnFilter"},
+      {
+        headerName: "Timestamp", 
+        width: 130, 
+        field: "ts_out_of_sight",
+        valueGetter: (value) => {
+          return moment(value.data.ts_out_of_sight, "YYYY-MM-DD HH:mm").format("HH:mm DD/MM/YYYY")
+          
+        }
+      },
+      {headerName: "Destination", field: "port_destination", filter: "agTextColumnFilter"},
+];
+
+var eGridDiv = document.querySelector('#myGrid');
+
+// let the grid know which columns to use
+var gridOptions = {
+    columnDefs: columnDefs
+};
+
+// create the grid passing in the div to use together with the columns & data we want to use
+new agGrid.Grid(eGridDiv, gridOptions)
+
+// lookup the container we want the Grid to use        
+var uri = "".concat({{.SHIPFLOW_SERVER}}, "/departuresRegister/", {{.portinformer}}, "/", {{.ts_start}}, "/", {{.ts_stop}});
+
+buildGrid(uri, gridOptions);
+
+
+</script>
+
+
+{{ end }}
+
+
