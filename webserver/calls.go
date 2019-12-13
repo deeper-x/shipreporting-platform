@@ -86,6 +86,49 @@ var MooringNow = func(c *gin.Context) {
 	})
 }
 
+// FormMooredRegister search form
+var FormMooredRegister = func(c *gin.Context) {
+	conn := db.Connector()
+	repo := db.NewRepository(conn)
+	defer repo.Close()
+
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
+	portinformerName := repo.SelectPortinformerName(portinformer)
+
+	c.HTML(http.StatusOK, "form_moored_register", gin.H{
+		"SHIPFLOW_SERVER":      os.Getenv("SHIPFLOW_SERVER"),
+		"SHIPREPORTING_SERVER": os.Getenv("SHIPREPORTING_SERVER"),
+		"portinformer":         portinformer,
+		"pageName":             "Moored register",
+		"portinformerName":     portinformerName,
+	})
+}
+
+// MooredRegister call for register arrivals
+var MooredRegister = func(c *gin.Context) {
+	conn := db.Connector()
+	repo := db.NewRepository(conn)
+	defer repo.Close()
+
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
+	portinformerName := repo.SelectPortinformerName(portinformer)
+	tsStart := c.Param("ts_start")
+	tsStop := c.Param("ts_stop")
+
+	c.HTML(http.StatusOK, "moored_register", gin.H{
+		"SHIPFLOW_SERVER":  os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":     portinformer,
+		"pageName":         "Moored register",
+		"portinformerName": portinformerName,
+		"ts_start":         tsStart,
+		"ts_stop":          tsStop,
+	})
+}
+
 // AnchoredNow call for currently anchored
 var AnchoredNow = func(c *gin.Context) {
 	conn := db.Connector()
