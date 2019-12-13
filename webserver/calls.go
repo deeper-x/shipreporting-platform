@@ -148,6 +148,49 @@ var AnchoredNow = func(c *gin.Context) {
 	})
 }
 
+// FormAnchoredRegister search form
+var FormAnchoredRegister = func(c *gin.Context) {
+	conn := db.Connector()
+	repo := db.NewRepository(conn)
+	defer repo.Close()
+
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
+	portinformerName := repo.SelectPortinformerName(portinformer)
+
+	c.HTML(http.StatusOK, "form_anchored_register", gin.H{
+		"SHIPFLOW_SERVER":      os.Getenv("SHIPFLOW_SERVER"),
+		"SHIPREPORTING_SERVER": os.Getenv("SHIPREPORTING_SERVER"),
+		"portinformer":         portinformer,
+		"pageName":             "Anchored register",
+		"portinformerName":     portinformerName,
+	})
+}
+
+// AnchoredRegister call for register arrivals
+var AnchoredRegister = func(c *gin.Context) {
+	conn := db.Connector()
+	repo := db.NewRepository(conn)
+	defer repo.Close()
+
+	session := sessions.Default(c)
+	portinformer := session.Get("managedPortinformer")
+
+	portinformerName := repo.SelectPortinformerName(portinformer)
+	tsStart := c.Param("ts_start")
+	tsStop := c.Param("ts_stop")
+
+	c.HTML(http.StatusOK, "anchored_register", gin.H{
+		"SHIPFLOW_SERVER":  os.Getenv("SHIPFLOW_SERVER"),
+		"portinformer":     portinformer,
+		"pageName":         "Anchored register",
+		"portinformerName": portinformerName,
+		"ts_start":         tsStart,
+		"ts_stop":          tsStop,
+	})
+}
+
 // ActiveNow currently open trips
 var ActiveNow = func(c *gin.Context) {
 	conn := db.Connector()

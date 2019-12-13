@@ -26,6 +26,8 @@ var paths = map[string]string{
 	"departuresRegisterPath":     utils.FullPath("/templates/tables/departures_register.html"),
 	"formMooredRegisterPath":     utils.FullPath("/templates/tables/form_moored_register.html"),
 	"mooredRegisterPath":         utils.FullPath("/templates/tables/moored_register.html"),
+	"formAnchoredRegisterPath":   utils.FullPath("/templates/tables/form_anchored_register.html"),
+	"anchoredRegisterPath":       utils.FullPath("/templates/tables/anchored_register.html"),
 }
 
 // multiRenderer todo doc
@@ -62,6 +64,8 @@ func multiRenderer() (bool, multitemplate.Renderer) {
 	r.AddFromFiles("departures_register", paths["indexPath"], paths["departuresRegisterPath"])
 	r.AddFromFiles("form_moored_register", paths["indexPath"], paths["formMooredRegisterPath"])
 	r.AddFromFiles("moored_register", paths["indexPath"], paths["mooredRegisterPath"])
+	r.AddFromFiles("form_anchored_register", paths["indexPath"], paths["formAnchoredRegisterPath"])
+	r.AddFromFiles("anchored_register", paths["indexPath"], paths["anchoredRegisterPath"])
 
 	return true, r
 }
