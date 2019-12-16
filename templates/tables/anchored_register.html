@@ -25,9 +25,8 @@
       {
         headerName: "Point",
         field: "roadstead",
-        valueGetter: (value) => {
-          return moment(value.data.roadstead, "YYYY-MM-DD HH:mm").format("HH:mm DD/MM/YYYY")
-        },
+        width: 120,
+        filter: "agTextColumnFilter",
       }
 ];
 
