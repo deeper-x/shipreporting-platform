@@ -4,7 +4,7 @@
         <div class='col-sm-4'></div>
         <div class='col-sm-1'>From:</div>
         <div class='col-sm-3'>
-            <input type='text' class="form-control" id='datetimepicker_from' />
+            <input type='text' class="form-control" id='datetimepicker_from' autocomplete="off"/>
         </div>
 </div>
 
@@ -16,7 +16,7 @@
         <div class='col-sm-4'></div>
         <div class='col-sm-1'>To:</div>
         <div class='col-sm-3'>
-            <input type='text' class="form-control" id='datetimepicker_to' />
+            <input type='text' class="form-control" id='datetimepicker_to' autocomplete="off"/>
         </div>
 </div>
 
@@ -33,10 +33,14 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker_from').datetimepicker();
+        $('#datetimepicker_from').datetimepicker({
+            autoclose:true
+        });
     });
     $(function () {
-        $('#datetimepicker_to').datetimepicker();
+        $('#datetimepicker_to').datetimepicker({
+            autoclose:true
+        });
     });
     $("#search_from_to").on('click', function(){
         var from = $("#datetimepicker_from").val();
