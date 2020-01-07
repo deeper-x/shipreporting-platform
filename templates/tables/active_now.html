@@ -3,7 +3,7 @@
 <div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
 <script type="module" charset="utf-8">
 
-    import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/build/main.js';
+    import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/src/main.js';
     // specify the columns
     var columnDefs = [
       {headerName: "ID", field: "id_control_unit_data", width: 60, filter: "agNumberColumnFilter"},
@@ -26,27 +26,29 @@
       },
       {headerName: "Shipping", width: 600, field: "shipping", filter: "agTextColumnFilter"},
 
-];
+]
 
-var eGridDiv = document.querySelector('#myGrid');
+var eGridDiv = document.querySelector('#myGrid')
 
 // let the grid know which columns to use
 var gridOptions = {
     columnDefs: columnDefs
-};
+}
+
 
 // create the grid passing in the div to use together with the columns & data we want to use
 new agGrid.Grid(eGridDiv, gridOptions)
 
+
 // lookup the container we want the Grid to use        
-var uri = "".concat({{.SHIPFLOW_SERVER}}, "/active_trips/", {{.portinformer}});
+var uri = "".concat({{.SHIPFLOW_SERVER}}, "/active_trips/", {{.portinformer}})
 
 buildGrid(uri, gridOptions);
 
 window.setInterval(()=>{
   Pace.restart();
   buildGrid(uri, gridOptions);
-}, 60000);
+}, 60000)
 
 </script>
 

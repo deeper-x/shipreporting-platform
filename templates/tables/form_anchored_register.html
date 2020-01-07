@@ -35,19 +35,19 @@
     $(function () {
         $('#datetimepicker_from').datetimepicker({
             autoclose:true
-        });
-    });
+        })
+    })
     $(function () {
         $('#datetimepicker_to').datetimepicker({
             autoclose:true
-        });
-    });
+        })
+    })
     $("#search_from_to").on('click', function(){
-        var from = $("#datetimepicker_from").val();
-        var to = $("#datetimepicker_to").val();
-        var url = "".concat({{.SHIPREPORTING_SERVER}}, "/application/anchored_register/", {{.portinformer}}, "/",  from , "/", to);
-        document.location = url;
-    });
+        var from = $("#datetimepicker_from").val()
+        var to = $("#datetimepicker_to").val()
+        var url = "".concat({{.SHIPREPORTING_SERVER}}, "/application/anchored_register/", {{.portinformer}}, "/",  from , "/", to)
+        document.location = url
+    })
 
 </script>
 				        
