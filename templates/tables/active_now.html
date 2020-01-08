@@ -1,30 +1,65 @@
 {{ define "main_content" }}
-
-<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
 <script type="module" charset="utf-8">
+  import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/src/main.js';
+  import {CustomDateComponent, CustomTimeComponent} from '../grid/js/src/custom_filters.js';
 
-    import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/src/main.js';
-    // specify the columns
-    var columnDefs = [
-      {headerName: "ID", field: "id_control_unit_data", width: 60, filter: "agNumberColumnFilter"},
-      {headerName: "Ship", field: "ship_name", width:150, filter: "agTextColumnFilter" },
-      {headerName: "Type", field: "ship_type", width: 150, filter: "agTextColumnFilter"},
-      {headerName: "GT", field: "gross_tonnage", width: 60, filter: "agNumberColumnFilter"},
-      {headerName: "NT", field: "net_tonnage", width: 60, filter: "agNumberColumnFilter"},
-      {headerName: "Width", field: "width", width: 80, filter: "agNumberColumnFilter"},
-      {headerName: "Length", field: "length", width: 80, filter: "agNumberColumnFilter"},
-
-      {headerName: "Status", width: 120, field: "current_activity"},
-      {
-        headerName: "Timestamp", 
-        width: 130, 
-        field: "timestamp",
-        valueGetter: (value) => {
-          return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("HH:mm DD/MM/YYYY")
-          
-        }
+  // specify the columns
+  var columnDefs = [
+    {headerName: "ID", field: "id_control_unit_data", width: 60, filter: "agNumberColumnFilter"},
+    {headerName: "Ship", field: "ship_name", width:150, filter: "agTextColumnFilter" },
+    {headerName: "Type", field: "ship_type", width: 150, filter: "agTextColumnFilter"},
+    {headerName: "GT", field: "gross_tonnage", width: 60, filter: "agNumberColumnFilter"},
+    {headerName: "NT", field: "net_tonnage", width: 60, filter: "agNumberColumnFilter"},
+    {headerName: "Width", field: "width", width: 80, filter: "agNumberColumnFilter"},
+    {headerName: "Length", field: "length", width: 80, filter: "agNumberColumnFilter"},
+    {headerName: "Status", width: 120, field: "current_activity"},
+    {
+      headerName: "DD/MM/YYYY", 
+      width: 120, 
+      field: "timestamp",
+      valueGetter: (value) => {
+        return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
       },
-      {headerName: "Shipping", width: 600, field: "shipping", filter: "agTextColumnFilter"},
+      filter:CustomDateComponent, 
+      filterParams:{
+        comparator:function (filterLocalDateAtMidnight, cellValue){
+            var dateAsString = cellValue.split(" ")[0];
+            if (dateAsString == null) return -1;
+            var dateParts  = dateAsString.split("/");
+            var cellDate = new Date(Number(dateParts[2]), Number(dateParts[1]) - 1, Number(dateParts[0]));
+            if (filterLocalDateAtMidnight.getTime() == cellDate.getTime()) {
+                return 0
+            }
+
+            if (cellDate < filterLocalDateAtMidnight) {
+                return -1;
+            }
+
+            if (cellDate > filterLocalDateAtMidnight) {
+                return 1;
+            }
+        }
+      }
+    },
+    {
+      headerName: "HH", 
+      width: 80, 
+      field: "timestamp",
+      valueGetter: (value) => {
+        return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("HH") 
+      },
+      filter: "agNumberColumnFilter"
+    },
+    {
+      headerName: "mm", 
+      width: 80, 
+      field: "timestamp",
+      valueGetter: (value) => {
+        return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("mm") 
+      },
+      filter: "agNumberColumnFilter"
+    },
+    {headerName: "Shipping", width: 600, field: "shipping", filter: "agTextColumnFilter"},
 
 ]
 
@@ -32,7 +67,10 @@ var eGridDiv = document.querySelector('#myGrid')
 
 // let the grid know which columns to use
 var gridOptions = {
-    columnDefs: columnDefs
+  defaultColDef: {
+    resizable: true,
+  },
+  columnDefs: columnDefs
 }
 
 
@@ -43,6 +81,11 @@ new agGrid.Grid(eGridDiv, gridOptions)
 // lookup the container we want the Grid to use        
 var uri = "".concat({{.SHIPFLOW_SERVER}}, "/active_trips/", {{.portinformer}})
 
+$("#excelExport").on('click', function onBtExport() {
+  var params = {};
+  gridOptions.api.exportDataAsExcel(params);
+});
+
 buildGrid(uri, gridOptions);
 
 window.setInterval(()=>{
@@ -51,6 +94,11 @@ window.setInterval(()=>{
 }, 60000)
 
 </script>
+
+<label>
+  <button id="excelExport"  style="margin: 5px; font-weight: bold;">Export to Excel</button>
+</label>
+<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
 
 
 {{ end }}
