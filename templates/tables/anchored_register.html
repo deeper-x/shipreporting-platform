@@ -14,20 +14,62 @@
       {headerName: "Width", field: "ship_width", width: 80, filter: "agNumberColumnFilter"},
       {headerName: "Length", field: "ship_length", width: 80, filter: "agNumberColumnFilter"},
       {
-        headerName: "Timestamp", 
-        width: 130, 
-        field: "ts_anchoring",
-        valueGetter: (value) => {
-          return moment(value.data.ts_anchoring, "YYYY-MM-DD HH:mm").format("HH:mm DD/MM/YYYY")
-          
-        }
-      },
-      {
         headerName: "Point",
         field: "roadstead",
         width: 120,
         filter: "agTextColumnFilter",
-      }
+      },
+      {
+        headerName: "Anchoring", 
+        width: 130, 
+        children: [
+            {
+              headerName: "D", 
+              field: "ts_anchoring", 
+              filter: "agNumberColumnFilter",
+              valueGetter: (value) => {
+                return getDay(value.data.ts_anchoring);
+              },
+              width: 60,
+            },
+            {
+              headerName: "M", 
+              field: "ts_anchoring", 
+              filter: "agNumberColumnFilter",
+              valueGetter: (value) => {
+                return getMonth(value.data.ts_anchoring);
+              },
+              width: 60,
+            },
+            {
+              headerName: "Y", 
+              field: "ts_anchoring", 
+              filter: "agNumberColumnFilter",
+              valueGetter: (value )=> {
+                return getYear(value.data.ts_anchoring)
+              },
+              width: 60,
+            },
+            {
+              headerName: "H", 
+              field: "ts_anchoring", 
+              filter: "agNumberColumnFilter",
+              valueGetter: (value) => {
+                return getHour(value.data.ts_anchoring);
+              },
+              width: 60,
+            },
+            {
+              headerName: "m", 
+              field: "ts_anchoring", 
+              filter: "agNumberColumnFilter",
+              valueGetter: (value) => {
+                return getMinute(value.data.ts_anchoring);
+              },
+              width: 60,
+            },
+        ]
+      },
 ];
 
 var eGridDiv = document.querySelector('#myGrid');

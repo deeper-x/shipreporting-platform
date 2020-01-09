@@ -14,13 +14,54 @@
       {headerName: "Width", field: "ship_width", width: 80, filter: "agNumberColumnFilter"},
       {headerName: "Length", field: "ship_length", width: 80, filter: "agNumberColumnFilter"},
       {
-        headerName: "Timestamp", 
-        width: 130, 
-        field: "ts_sighting",
-        valueGetter: (value) => {
-          return moment(value.data.ts_sighting, "YYYY-MM-DD HH:mm").format("HH:mm DD/MM/YYYY")
-          
-        }
+        headerName: "Arrival", 
+        children: [
+          {
+            headerName: "D", 
+            field: "ts_sighting", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getDay(value.data.ts_sighting);
+            },
+            width: 60,
+          },
+          {
+            headerName: "M", 
+            field: "ts_sighting", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getMonth(value.data.ts_sighting);
+            },
+            width: 60,
+          },
+          {
+            headerName: "Y", 
+            field: "ts_sighting", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value )=> {
+              return getYear(value.data.ts_sighting)
+            },
+            width: 60,
+          },
+          {
+            headerName: "H", 
+            field: "ts_sighting", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getHour(value.data.ts_sighting);
+            },
+            width: 60,
+          },
+          {
+            headerName: "m", 
+            field: "ts_sighting", 
+            filter: "agNumberColumnFilter",
+            valueGetter: (value) => {
+              return getMinute(value.data.ts_sighting);
+            },
+            width: 60,
+          },
+      ]
       },
 ];
 
