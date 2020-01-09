@@ -1,7 +1,8 @@
 {{ define "main_content" }}
+
 <script type="module" charset="utf-8">
   import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/src/main.js';
-  import {CustomDateComponent, CustomTimeComponent} from '../grid/js/src/custom_filters.js';
+  import {CustomDateComponent} from '../grid/js/src/custom_filters.js';
 
   // specify the columns
   var columnDefs = [
@@ -20,7 +21,7 @@
       valueGetter: (value) => {
         return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
       },
-      filter:CustomDateComponent, 
+      filter:"agDateColumnFilter", 
       filterParams:{
         comparator:function (filterLocalDateAtMidnight, cellValue){
             var dateAsString = cellValue.split(" ")[0];
@@ -69,6 +70,9 @@ var eGridDiv = document.querySelector('#myGrid')
 var gridOptions = {
   defaultColDef: {
     resizable: true,
+  },
+  components: {
+    agDateInput: CustomDateComponent
   },
   columnDefs: columnDefs
 }
