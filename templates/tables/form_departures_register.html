@@ -33,13 +33,15 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker_from').datetimepicker({
-            autoclose:true
+        $('#datetimepicker_from').flatpickr({
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
         });
     });
     $(function () {
-        $('#datetimepicker_to').datetimepicker({
-            autoclose:true
+        $('#datetimepicker_to').flatpickr({
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
         });
     });
     $("#search_from_to").on('click', function(){
