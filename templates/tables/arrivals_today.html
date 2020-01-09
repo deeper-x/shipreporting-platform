@@ -2,7 +2,7 @@
 
 <div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
 <script type="module" charset="utf-8">
-
+    import {CustomDateComponent} from '../grid/js/src/custom_filters.js';
     import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/src/main.js';
     // specify the columns
     var columnDefs = [
@@ -11,53 +11,54 @@
       {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
       //  grossTonnage, length, width, shippedGoods, tsPlannedMooring, tsReadiness
 
-      {headerName: "Arrivals DD/MM/YYYY HH:mm",
+      {headerName: "Arrivals",
       children: [
-          {
-            headerName: "D", 
-            field: "ts_sighting", 
-            filter: "agNumberColumnFilter",
-            valueGetter: (value) => {
-              return getDay(value.data.ts_sighting);
-            },
-            width: 60,
-          },
-          {
-            headerName: "M", 
-            field: "ts_sighting", 
-            filter: "agNumberColumnFilter",
-            valueGetter: (value) => {
-              return getMonth(value.data.ts_sighting);
-            },
-            width: 60,
-          },
-          {
-            headerName: "Y", 
-            field: "ts_sighting", 
-            filter: "agNumberColumnFilter",
-            valueGetter: (value )=> {
-              return getYear(value.data.ts_sighting)
-            },
-            width: 60,
-          },
-          {
-            headerName: "H", 
-            field: "ts_sighting", 
-            filter: "agNumberColumnFilter",
-            valueGetter: (value) => {
-              return getHour(value.data.ts_sighting);
-            },
-            width: 60,
-          },
-          {
-            headerName: "m", 
-            field: "ts_sighting", 
-            filter: "agNumberColumnFilter",
-            valueGetter: (value) => {
-              return getMinute(value.data.ts_sighting);
-            },
-            width: 60,
-          },
+      {
+        headerName: "DD/MM/YYYY", 
+        width: 120, 
+        field: "ts_sighting",
+        valueGetter: (value) => {
+          return moment(value.data.ts_sighting, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
+        },
+        filter:"agDateColumnFilter", 
+        filterParams:{
+          comparator:function (filterLocalDateAtMidnight, cellValue){
+              var dateAsString = cellValue.split(" ")[0];
+              if (dateAsString == null) return -1;
+              var dateParts  = dateAsString.split("/");
+              var cellDate = new Date(Number(dateParts[2]), Number(dateParts[1]) - 1, Number(dateParts[0]));
+              if (filterLocalDateAtMidnight.getTime() == cellDate.getTime()) {
+                  return 0
+              }
+  
+              if (cellDate < filterLocalDateAtMidnight) {
+                  return -1;
+              }
+  
+              if (cellDate > filterLocalDateAtMidnight) {
+                  return 1;
+              }
+          }
+        }
+      },
+      {
+        headerName: "HH", 
+        width: 80, 
+        field: "ts_sighting",
+        valueGetter: (value) => {
+          return moment(value.data.ts_sighting, "YYYY-MM-DD HH:mm").format("HH") 
+        },
+        filter: "agNumberColumnFilter"
+      },
+      {
+        headerName: "mm", 
+        width: 80, 
+        field: "ts_sighting",
+        valueGetter: (value) => {
+          return moment(value.data.ts_sighting, "YYYY-MM-DD HH:mm").format("mm") 
+        },
+        filter: "agNumberColumnFilter"
+      },
       ]
         },
       {
@@ -68,10 +69,15 @@
       },
     ];
 
-    // let the grid know which columns to use
     var gridOptions = {
+      defaultColDef: {
+        resizable: true,
+      },
+      components: {
+        agDateInput: CustomDateComponent
+      },
       columnDefs: columnDefs
-    };
+    }
 
   // lookup the container we want the Grid to use
   var eGridDiv = document.querySelector('#myGrid');
