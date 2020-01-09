@@ -54,6 +54,7 @@ export var getMinute = function (value) {
 }
 
 export var buildGrid = function (uri, gridOptions) {
+  // eslint-disable-next-line no-undef
   agGrid.simpleHttpRequest({ url: uri }).then(function (data) {
     gridOptions.api.setRowData(data)
   })
