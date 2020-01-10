@@ -1,6 +1,5 @@
 {{ define "main_content" }}
 
-<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
 <script type="module" charset="utf-8">
 
     import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '/grid/js/src/main.js';
@@ -21,7 +20,9 @@
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value) => {
-              return getDay(value.data.ts_sighting);
+              if (value.data){
+                return getDay(value.data.ts_sighting);
+              }
             },
             width: 80,
             enableRowGroup: true,
@@ -31,7 +32,9 @@
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value) => {
-              return getMonth(value.data.ts_sighting);
+              if (value.data){
+                return getMonth(value.data.ts_sighting);
+              }
             },
             width: 80,
             enableRowGroup: true,
@@ -41,7 +44,9 @@
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value )=> {
-              return getYear(value.data.ts_sighting)
+              if (value.data){
+                return getYear(value.data.ts_sighting);
+              }
             },
             width: 80,
             enableRowGroup: true,
@@ -51,7 +56,9 @@
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value) => {
-              return getHour(value.data.ts_sighting);
+              if (value.data){
+                return getHour(value.data.ts_sighting);
+              }
             },
             width: 80,
             enableRowGroup: true,
@@ -61,7 +68,9 @@
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value) => {
-              return getMinute(value.data.ts_sighting);
+              if (value.data){
+                return getMinute(value.data.ts_sighting);
+              }
             },
             width: 80,
             enableRowGroup: true,
@@ -76,6 +85,7 @@ var eGridDiv = document.querySelector('#myGrid');
 var gridOptions = {
     columnDefs: columnDefs,
     groupUseEntireRow: true,
+    sideBar: true,
 };
 
 // create the grid passing in the div to use together with the columns & data we want to use
@@ -86,9 +96,17 @@ var uri = "".concat({{.SHIPFLOW_SERVER}}, "/arrivalsRegister/", {{.portinformer}
 
 buildGrid(uri, gridOptions);
 
+$("#excelExport").on('click', function onBtExport() {
+  var params = {};
+  gridOptions.api.exportDataAsExcel(params);
+});
 
 </script>
 
+<label>
+  <button id="excelExport"  style="margin: 5px; font-weight: bold;">Export to Excel</button>
+</label>
+<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
 
 {{ end }}
 
