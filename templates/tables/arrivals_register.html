@@ -8,7 +8,7 @@
     var columnDefs = [
       {headerName: "ID", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
       {headerName: "Ship", field: "ship_name", width:150, filter: "agTextColumnFilter" },
-      {headerName: "Type", field: "ship_type", width: 150, filter: "agTextColumnFilter"},
+      {headerName: "Type", field: "ship_type", width: 150, filter: "agTextColumnFilter",enableRowGroup: true,},
       {headerName: "GT", field: "gross_tonnage", width: 60, filter: "agNumberColumnFilter"},
       {headerName: "NT", field: "net_tonnage", width: 60, filter: "agNumberColumnFilter"},
       {headerName: "Width", field: "ship_width", width: 80, filter: "agNumberColumnFilter"},
@@ -17,49 +17,54 @@
         headerName: "Arrival", 
         children: [
           {
-            headerName: "D", 
+            headerName: "Day", 
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value) => {
               return getDay(value.data.ts_sighting);
             },
-            width: 60,
+            width: 80,
+            enableRowGroup: true,
           },
           {
-            headerName: "M", 
+            headerName: "Month", 
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value) => {
               return getMonth(value.data.ts_sighting);
             },
-            width: 60,
+            width: 80,
+            enableRowGroup: true,
           },
           {
-            headerName: "Y", 
+            headerName: "Year", 
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value )=> {
               return getYear(value.data.ts_sighting)
             },
-            width: 60,
+            width: 80,
+            enableRowGroup: true,
           },
           {
-            headerName: "H", 
+            headerName: "Hour", 
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value) => {
               return getHour(value.data.ts_sighting);
             },
-            width: 60,
+            width: 80,
+            enableRowGroup: true,
           },
           {
-            headerName: "m", 
+            headerName: "Month", 
             field: "ts_sighting", 
             filter: "agNumberColumnFilter",
             valueGetter: (value) => {
               return getMinute(value.data.ts_sighting);
             },
-            width: 60,
+            width: 80,
+            enableRowGroup: true,
           },
       ]
       },
@@ -69,7 +74,8 @@ var eGridDiv = document.querySelector('#myGrid');
 
 // let the grid know which columns to use
 var gridOptions = {
-    columnDefs: columnDefs
+    columnDefs: columnDefs,
+    groupUseEntireRow: true,
 };
 
 // create the grid passing in the div to use together with the columns & data we want to use
