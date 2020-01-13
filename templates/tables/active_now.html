@@ -107,15 +107,44 @@ $("#excelExport").on('click', function onBtExport() {
 
 buildGrid(uri, gridOptions);
 
+$("#print").on('click', function onBtPrint() {
+  var gridApi = gridOptions.api;
+
+  setPrinterFriendly(gridApi);
+
+  setTimeout( function( ) {
+      print();
+      setNormal(gridApi);
+  }, 2000);
+
+});
+
+function setPrinterFriendly(api) {
+  var eGridDiv = document.querySelector('#myGrid');
+  
+  api.setDomLayout('print');
+}
+
+function setNormal(api) {
+  var eGridDiv = document.querySelector('#myGrid');
+  
+  api.setDomLayout(null);
+}
+
+
 window.setInterval(()=>{
   Pace.restart();
   buildGrid(uri, gridOptions);
 }, 60000)
 
+
 </script>
 
 <label>
   <button id="excelExport"  style="margin: 5px; font-weight: bold;">Export to Excel</button>
+</label>
+<label>
+  <button id="print"  style="margin: 5px; font-weight: bold;">Print</button>
 </label>
 <div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
 
