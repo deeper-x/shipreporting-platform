@@ -9,8 +9,7 @@
     var columnDefs = [
       {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
       {headerName: "Ship", field: "ship", filter: "agTextColumnFilter" },
-      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
-      
+      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter", enableRowGroup: true,},
       {headerName: "Mooring",
       children: [
           {
@@ -18,7 +17,9 @@
       width: 120, 
       field: "mooring_time",
       valueGetter: (value) => {
-        return moment(value.data.mooring_time, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
+        if (value.data){
+          return moment(value.data.mooring_time, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
+        }
       },
       filter:"agDateColumnFilter", 
       filterParams:{
@@ -39,14 +40,17 @@
                 return 1;
             }
         }
-      }
+      },
+     enableRowGroup: true,
     },
     {
       headerName: "HH", 
       width: 80, 
       field: "mooring_time",
       valueGetter: (value) => {
-        return moment(value.data.mooring_time, "YYYY-MM-DD HH:mm").format("HH") 
+        if (value.data){
+          return moment(value.data.mooring_time, "YYYY-MM-DD HH:mm").format("HH")
+        } 
       },
       filter: "agNumberColumnFilter"
     },
@@ -55,20 +59,22 @@
       width: 80, 
       field: "mooring_time",
       valueGetter: (value) => {
-        return moment(value.data.mooring_time, "YYYY-MM-DD HH:mm").format("mm") 
+        if (value.data){
+          return moment(value.data.mooring_time, "YYYY-MM-DD HH:mm").format("mm")
+        }
       },
       filter: "agNumberColumnFilter"
     },
       ]
         },
       {
-          headerName: "Quay", field: "quay", filter: "agTextColumnFilter",
+          headerName: "Quay", field: "quay", filter: "agTextColumnFilter", enableRowGroup: true,
       },
       {
         headerName: "Shipping", field: "shipped_goods", width: 520, filter: "agTextColumnFilter", resizable: true,
       },
       {
-        headerName: "ISO3", field: "iso3", width: 80, filter: "agTextColumnFilter",
+        headerName: "ISO3", field: "iso3", width: 80, filter: "agTextColumnFilter", enableRowGroup: true,
       },
 ];
 
@@ -90,7 +96,8 @@ var gridOptions = {
             {colId: "timestamp", sort: "asc"},
         ];
     params.api.setSortModel(defaultSortModel);
-  }
+  },
+  groupDefaultExpanded: -1,
 }
 
 

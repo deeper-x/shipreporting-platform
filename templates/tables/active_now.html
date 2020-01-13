@@ -8,18 +8,20 @@
   var columnDefs = [
     {headerName: "ID", field: "id_control_unit_data", width: 60, filter: "agNumberColumnFilter"},
     {headerName: "Ship", field: "ship_name", width:150, filter: "agTextColumnFilter" },
-    {headerName: "Type", field: "ship_type", width: 150, filter: "agTextColumnFilter"},
+    {headerName: "Type", field: "ship_type", width: 150, filter: "agTextColumnFilter", enableRowGroup: true,},
     {headerName: "GT", field: "gross_tonnage", width: 60, filter: "agNumberColumnFilter"},
     {headerName: "NT", field: "net_tonnage", width: 60, filter: "agNumberColumnFilter"},
     {headerName: "Width", field: "width", width: 80, filter: "agNumberColumnFilter"},
     {headerName: "Length", field: "length", width: 80, filter: "agNumberColumnFilter"},
-    {headerName: "Status", width: 120, field: "current_activity"},
+    {headerName: "Status", width: 120, field: "current_activity", enableRowGroup: true,},
     {
       headerName: "Date", 
       width: 120, 
       field: "timestamp",
       valueGetter: (value) => {
-        return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
+        if (value.data){
+          return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
+        }
       },
       filter:"agDateColumnFilter", 
       filterParams:{
@@ -47,7 +49,9 @@
       width: 80, 
       field: "timestamp",
       valueGetter: (value) => {
-        return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("HH") 
+        if (value.data){
+          return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("HH")
+        }
       },
       filter: "agNumberColumnFilter"
     },
@@ -56,7 +60,9 @@
       width: 80, 
       field: "timestamp",
       valueGetter: (value) => {
-        return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("mm") 
+        if (value.data){
+          return moment(value.data.timestamp, "YYYY-MM-DD HH:mm").format("mm")
+        }
       },
       filter: "agNumberColumnFilter"
     },
@@ -82,7 +88,8 @@ var gridOptions = {
             {colId: "timestamp", sort: "asc"},
         ];
     params.api.setSortModel(defaultSortModel);
-  }
+  },
+  groupDefaultExpanded: -1,
 }
 
 
