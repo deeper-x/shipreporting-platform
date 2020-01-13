@@ -53,8 +53,13 @@
 
     // let the grid know which columns to use
     var gridOptions = {
-      columnDefs: columnDefs
-    };
+      sideBar: true,
+      defaultColDef: {
+        resizable: true,
+        sortable: true,
+      },
+      columnDefs: columnDefs,
+    }
 
   // lookup the container we want the Grid to use
   var eGridDiv = document.querySelector('#myGrid');

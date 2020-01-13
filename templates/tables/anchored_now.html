@@ -14,7 +14,7 @@
       {headerName: "Anchored DD/MM/YYYY HH:mm",
       children: [
       {
-        headerName: "DD/MM/YYYY", 
+        headerName: "Date", 
         width: 120, 
         field: "anchoring_time",
         valueGetter: (value) => {
@@ -72,15 +72,24 @@
       },
 ];
 
-  var gridOptions = {
-    defaultColDef: {
-      resizable: true,
-    },
-    components: {
-      agDateInput: CustomDateComponent
-    },
-    columnDefs: columnDefs
-  };
+var gridOptions = {
+  sideBar: true,
+  defaultColDef: {
+    resizable: true,
+    sortable: true,
+  },
+  components: {
+    agDateInput: CustomDateComponent
+  },
+  animateRows: true,
+  columnDefs: columnDefs,
+  onGridReady: function(params) {
+    var defaultSortModel = [
+            {colId: "timestamp", sort: "asc"},
+        ];
+    params.api.setSortModel(defaultSortModel);
+  }
+}
 
   // lookup the container we want the Grid to use
   var eGridDiv = document.querySelector('#myGrid');
