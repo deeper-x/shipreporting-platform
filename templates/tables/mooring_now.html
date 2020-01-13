@@ -14,7 +14,7 @@
       {headerName: "Mooring",
       children: [
           {
-      headerName: "DD/MM/YYYY", 
+      headerName: "Date", 
       width: 120, 
       field: "mooring_time",
       valueGetter: (value) => {
@@ -75,14 +75,24 @@
 var eGridDiv = document.querySelector('#myGrid');
 
 var gridOptions = {
+  sideBar: true,
   defaultColDef: {
     resizable: true,
+    sortable: true,
   },
   components: {
     agDateInput: CustomDateComponent
   },
-  columnDefs: columnDefs
+  animateRows: true,
+  columnDefs: columnDefs,
+  onGridReady: function(params) {
+    var defaultSortModel = [
+            {colId: "timestamp", sort: "asc"},
+        ];
+    params.api.setSortModel(defaultSortModel);
+  }
 }
+
 
 // create the grid passing in the div to use together with the columns & data we want to use
 new agGrid.Grid(eGridDiv, gridOptions)

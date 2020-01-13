@@ -15,7 +15,7 @@
     {headerName: "Length", field: "length", width: 80, filter: "agNumberColumnFilter"},
     {headerName: "Status", width: 120, field: "current_activity"},
     {
-      headerName: "DD/MM/YYYY", 
+      headerName: "Date", 
       width: 120, 
       field: "timestamp",
       valueGetter: (value) => {
@@ -67,13 +67,22 @@
 var eGridDiv = document.querySelector('#myGrid')
 
 var gridOptions = {
+  sideBar: true,
   defaultColDef: {
     resizable: true,
+    sortable: true,
   },
   components: {
     agDateInput: CustomDateComponent
   },
-  columnDefs: columnDefs
+  animateRows: true,
+  columnDefs: columnDefs,
+  onGridReady: function(params) {
+    var defaultSortModel = [
+            {colId: "timestamp", sort: "asc"},
+        ];
+    params.api.setSortModel(defaultSortModel);
+  }
 }
 
 
