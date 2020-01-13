@@ -99,7 +99,15 @@
             ];
         params.api.setSortModel(defaultSortModel);
       },
-      groupDefaultExpanded: -1,
+      enableRangeSelection: true,
+      statusBar: {
+      statusPanels: [
+        { statusPanel: 'agTotalAndFilteredRowCountComponent', align: 'left' },
+        { statusPanel: 'agAggregationComponent', align: 'right'},
+        { statusPanel: 'agFilteredRowCountComponent' },
+        { statusPanel: 'agSelectedRowCountComponent', align: 'center' },    
+      ]
+      },
     }
 
   // lookup the container we want the Grid to use
