@@ -19,7 +19,7 @@
             valueGetter: (value) => {
               return getDay(value.data.ts_shifting_prevision);
             },
-            width: 60,
+            width: 60, enableRowGroup: true,
           },
           {
             headerName: "M", 
@@ -28,7 +28,7 @@
             valueGetter: (value) => {
               return getMonth(value.data.ts_shifting_prevision);
             },
-            width: 60,
+            width: 60, enableRowGroup: true,
           },
           {
             headerName: "Y", 
@@ -37,7 +37,7 @@
             valueGetter: (value )=> {
               return getYear(value.data.ts_shifting_prevision)
             },
-            width: 60,
+            width: 60, enableRowGroup: true,
           },
           {
             headerName: "H", 
@@ -46,7 +46,7 @@
             valueGetter: (value) => {
               return getHour(value.data.ts_shifting_prevision);
             },
-            width: 60,
+            width: 60, enableRowGroup: true,
           },
           {
             headerName: "m", 
@@ -55,7 +55,7 @@
             valueGetter: (value) => {
               return getMinute(value.data.ts_shifting_prevision);
             },
-            width: 60,
+            width: 60, enableRowGroup: true,
           },
       ]
         },
@@ -76,6 +76,7 @@
       },
       animateRows: true,
       columnDefs: columnDefs,
+      groupDefaultExpanded: -1,
     }
 
   // lookup the container we want the Grid to use

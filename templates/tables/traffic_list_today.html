@@ -8,46 +8,46 @@
     var columnDefs = [
       {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
       {headerName: "Ship", field: "ship_name", filter: "agTextColumnFilter" },
-      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
+      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter", enableRowGroup: true,},
       //  grossTonnage, length, width, shippedGoods, tsPlannedMooring, tsReadiness
       {
-        headerName: "ISO3", field: "ship_flag", width: 80, filter: "agTextColumnFilter",
+        headerName: "ISO3", field: "ship_flag", width: 80, filter: "agTextColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Cont", field: "num_container", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Cont", field: "num_container", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Pax", field: "num_passengers", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Pax", field: "num_passengers", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Cam", field: "num_camion", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Cam", field: "num_camion", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Furg", field: "num_furgoni", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Furg", field: "num_furgoni", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Trails", field: "num_rimorchi", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Trails", field: "num_rimorchi", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Cars", field: "num_auto", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Cars", field: "num_auto", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Moto", field: "num_moto", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Moto", field: "num_moto", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Camp", field: "num_camper", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Camp", field: "num_camper", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Bus", field: "num_bus", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Bus", field: "num_bus", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Minibus", field: "num_minibus", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Minibus", field: "num_minibus", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Op", field: "mvnt_type", width: 80, filter: "agNumberColumnFilter",
+        headerName: "Op", field: "mvnt_type", width: 80, filter: "agNumberColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Quay", field: "quay", width: 80, filter: "agNumberColumnFilter", resizable: true,
+        headerName: "Quay", field: "quay", width: 80, filter: "agNumberColumnFilter", resizable: true, enableRowGroup: true,
       },
     ];
 
@@ -59,6 +59,7 @@
         sortable: true,
       },
       columnDefs: columnDefs,
+      groupDefaultExpanded: -1,
     }
 
   // lookup the container we want the Grid to use

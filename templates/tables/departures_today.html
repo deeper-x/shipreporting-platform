@@ -8,7 +8,7 @@
     var columnDefs = [
       {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
       {headerName: "Ship", field: "ship_name", filter: "agTextColumnFilter" },
-      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
+      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter", enableRowGroup: true,},
       //  grossTonnage, length, width, shippedGoods, tsPlannedMooring, tsReadiness
 
       {headerName: "Departure",
@@ -18,7 +18,9 @@
         width: 120, 
         field: "ts_out_of_sight",
         valueGetter: (value) => {
-          return moment(value.data.ts_out_of_sight, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
+          if (value.data){
+            return moment(value.data.ts_out_of_sight, "YYYY-MM-DD HH:mm").format("DD/MM/YYYY")
+          }
         },
         filter:"agDateColumnFilter", 
         filterParams:{
@@ -39,14 +41,17 @@
                   return 1;
               }
           }
-        }
+        },
+        enableRowGroup: true,
       },
       {
         headerName: "HH", 
         width: 80, 
         field: "ts_out_of_sight",
         valueGetter: (value) => {
-          return moment(value.data.ts_out_of_sight, "YYYY-MM-DD HH:mm").format("HH") 
+          if (value.data){
+            return moment(value.data.ts_out_of_sight, "YYYY-MM-DD HH:mm").format("HH")
+          } 
         },
         filter: "agNumberColumnFilter"
       },
@@ -55,17 +60,19 @@
         width: 80, 
         field: "ts_out_of_sight",
         valueGetter: (value) => {
-          return moment(value.data.ts_out_of_sight, "YYYY-MM-DD HH:mm").format("mm") 
+          if (value.data){
+            return moment(value.data.ts_out_of_sight, "YYYY-MM-DD HH:mm").format("mm")
+          } 
         },
         filter: "agNumberColumnFilter"
       },
       ]
         },
       {
-        headerName: "ISO3", field: "ship_flag", width: 80, filter: "agTextColumnFilter",
+        headerName: "ISO3", field: "ship_flag", width: 80, filter: "agTextColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Agency", field: "agency", filter: "agTextColumnFilter",
+        headerName: "Agency", field: "agency", filter: "agTextColumnFilter", enableRowGroup: true,
       },
     ];
 
@@ -85,7 +92,8 @@
                 {colId: "timestamp", sort: "asc"},
             ];
         params.api.setSortModel(defaultSortModel);
-      }
+      },
+      groupDefaultExpanded: -1,
     }
 
 

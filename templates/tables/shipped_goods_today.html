@@ -8,13 +8,13 @@
     var columnDefs = [
       {headerName: "id", field: "id_trip", width: 60, filter: "agNumberColumnFilter"},
       {headerName: "Ship", field: "ship_name", filter: "agTextColumnFilter" },
-      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter"},
+      {headerName: "Type", field: "ship_type", width: 80, filter: "agTextColumnFilter", enableRowGroup: true,},
       //  grossTonnage, length, width, shippedGoods, tsPlannedMooring, tsReadiness
       {
-        headerName: "ISO3", field: "ship_flag", width: 80, filter: "agTextColumnFilter",
+        headerName: "ISO3", field: "ship_flag", width: 80, filter: "agTextColumnFilter", enableRowGroup: true,
       },
       {
-        headerName: "Shipping", field: "goods_category", filter: "agTextColumnFilter", resizable: true,
+        headerName: "Shipping", field: "goods_category", filter: "agTextColumnFilter", resizable: true, enableRowGroup: true,
       },
       {
         headerName: "Quantity", field: "quantity", filter: "agTextColumnFilter",
@@ -23,7 +23,7 @@
         headerName: "Unit", field: "unit", filter: "agTextColumnFilter",
       },
       {
-        headerName: "Operation", field: "goods_mvmnt_type", filter: "agTextColumnFilter",
+        headerName: "Operation", field: "goods_mvmnt_type", filter: "agTextColumnFilter", enableRowGroup: true,
       },
     ];
 
@@ -35,6 +35,7 @@
         sortable: true,
       },
       columnDefs: columnDefs,
+      groupDefaultExpanded: -1,
     }
 
   // lookup the container we want the Grid to use
