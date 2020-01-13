@@ -1,5 +1,12 @@
 {{ define "main_content" }}
 
+<label>
+  <button id="excelExport"  style="margin: 5px; font-weight: bold;">Export to Excel</button>
+</label>
+<label>
+  <button id="print"  style="margin: 5px; font-weight: bold;">Print</button>
+</label>
+
 <div id="myGrid" style="height: 100%;width:98%;" class="ag-theme-balham"></div>
 <script type="module" charset="utf-8">
     import {CustomDateComponent} from '../grid/js/src/custom_filters.js';
@@ -108,6 +115,32 @@
   var uri = "".concat({{.SHIPFLOW_SERVER}}, "/departuresToday/", {{.portinformer}});
   
   buildGrid(uri, gridOptions);
+
+  $("#print").on('click', function onBtPrint() {
+    var gridApi = gridOptions.api;
+  
+    setPrinterFriendly(gridApi);
+  
+    setTimeout( function( ) {
+        print();
+        setNormal(gridApi);
+    }, 2000);
+  
+  });
+  
+  function setPrinterFriendly(api) {
+    var eGridDiv = document.querySelector('#myGrid');
+    
+    api.setDomLayout('print');
+  }
+  
+  function setNormal(api) {
+    var eGridDiv = document.querySelector('#myGrid');
+    
+    api.setDomLayout(null);
+  }
+  
+
 
   window.setInterval(()=>{
     Pace.restart();
