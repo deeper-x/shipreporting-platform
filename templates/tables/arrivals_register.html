@@ -91,6 +91,15 @@ var gridOptions = {
   animateRows: true,
   columnDefs: columnDefs,
   groupDefaultExpanded: -1,
+  enableRangeSelection: true,
+  statusBar: {
+    statusPanels: [
+        { statusPanel: 'agTotalAndFilteredRowCountComponent', align: 'left' },
+        { statusPanel: 'agAggregationComponent', align: 'right'},
+        { statusPanel: 'agFilteredRowCountComponent' },
+        { statusPanel: 'agSelectedRowCountComponent', align: 'center' },    
+    ]
+  },
 }
 // create the grid passing in the div to use together with the columns & data we want to use
 new agGrid.Grid(eGridDiv, gridOptions)
