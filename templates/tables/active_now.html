@@ -1,5 +1,6 @@
 {{ define "main_content" }}
 
+
 <script type="module" charset="utf-8">
   import {getDay, getMonth, getYear, getHour, getMinute, buildGrid} from '../grid/js/src/main.js';
   import {CustomDateComponent} from '../grid/js/src/custom_filters.js';
@@ -67,6 +68,8 @@
       filter: "agNumberColumnFilter"
     },
     {headerName: "Shipping", width: 600, field: "shipping", filter: "agTextColumnFilter"},
+    {headerName: "Agency", field: "agency", width:150, filter: "agTextColumnFilter" },
+    
 
 ]
 
