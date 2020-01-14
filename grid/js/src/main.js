@@ -13,7 +13,8 @@ export var getYear = function (value) {
 
 export var getMonth = function (value) {
   if (value) {
-    return Number(value.split('-')[secondElem])
+    // eslint-disable-next-line no-undef
+    return moment(value.split('-')[secondElem]).format('MMMM')
   } else {
     return ''
   }

@@ -64,9 +64,9 @@
             enableRowGroup: true,
           },
           {
-            headerName: "Month", 
+            headerName: "Minute", 
             field: "ts_sighting", 
-            filter: "agNumberColumnFilter",
+            filter: "agTextColumnFilter",
             valueGetter: (value) => {
               if (value.data){
                 return getMinute(value.data.ts_sighting);
@@ -77,6 +77,7 @@
           },
       ]
       },
+      {headerName: "Agency", field: "agency", width: 160, filter: "agTextColumnFilter", enableRowGroup: true},
 ];
 
 var eGridDiv = document.querySelector('#myGrid');
