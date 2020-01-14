@@ -1,5 +1,3 @@
-import moment from 'moment'
-
 var firstElem = 0
 var secondElem = 1
 var thirdElem = 2
@@ -15,7 +13,6 @@ export var getYear = function (value) {
 
 export var getMonth = function (value) {
   if (value) {
-    // eslint-disable-next-line no-undef
     return moment(value.split('-')[secondElem], 'MM').format('MMMM')
   } else {
     return ''

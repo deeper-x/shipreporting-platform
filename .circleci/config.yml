@@ -26,12 +26,12 @@ jobs:
       - run: go test -v ./...
   
 
-      - run:
-          name: install-node-repo
-          command: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-      - run:
-          name: install-node
-          command: sudo apt install nodejs
-      - run: # run tests
-          name: test
-          command: cd grid/js; npm install; npm test
+      # - run:
+      #     name: install-node-repo
+      #     command: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+      # - run:
+      #     name: install-node
+      #     command: sudo apt install nodejs
+      # - run: # run tests
+      #     name: test
+      #     command: cd grid/js; npm install; npm test
