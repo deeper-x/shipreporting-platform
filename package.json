@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha -r esm grid/js/test/"
-  }, 
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -17,6 +17,7 @@
     "chai": "^4.2.0",
     "esm": "^3.2.25",
     "mocha": "^6.2.2",
+    "moment": "^2.24.0",
     "npm": "^6.13.4",
     "please-wait": "0.0.5",
     "react": "^16.12.0"
