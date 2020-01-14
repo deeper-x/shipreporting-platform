@@ -11,8 +11,8 @@ describe('Timestamp substring', function () {
 })
 
 describe('Timestamp substring', function () {
-  it('should return 10', function () {
-    expect(getMonth(inputString)).to.equal(10)
+  it('should return October', function () {
+    expect(getMonth(inputString)).to.equal('October')
   })
 })
 
