@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/deeper-x/shipreporting-platform/auth"
-	"github.com/deeper-x/shipreporting-platform/db"
+	sdb "github.com/deeper-x/shipreporting-platform/shipflowdb"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
@@ -70,8 +70,8 @@ var ProcessAuth = func(c *gin.Context) (bool, string) {
 
 // CreateSession build session
 var CreateSession = func(c *gin.Context, token string) bool {
-	connector := db.Connector()
-	repository := db.Repository{Conn: connector}
+	connector := sdb.Connector()
+	repository := sdb.Repository{Conn: connector}
 
 	session := sessions.Default(c)
 
@@ -97,12 +97,12 @@ var CreateSession = func(c *gin.Context, token string) bool {
 }
 
 // GetUserID retrive user id from auth token
-var GetUserID = func(repo db.Repository, authToken string) (string, bool) {
+var GetUserID = func(repo sdb.Repository, authToken string) (string, bool) {
 	return repo.SelectUserID(authToken)
 }
 
 // GetManagedPortinformer retrieve managed portinformer
-var GetManagedPortinformer = func(repo db.Repository, userID string) string {
+var GetManagedPortinformer = func(repo sdb.Repository, userID string) string {
 	return repo.SelectUserPortinformer(userID)
 }
 

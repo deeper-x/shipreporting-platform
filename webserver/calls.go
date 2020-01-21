@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/deeper-x/shipreporting-platform/db"
+	sdb "github.com/deeper-x/shipreporting-platform/shipflowdb"
 	"github.com/deeper-x/shipreporting-platform/utils"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -69,8 +69,8 @@ var Logout = func(c *gin.Context) {
 
 // MooringNow call for currently moored
 var MooringNow = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -88,8 +88,8 @@ var MooringNow = func(c *gin.Context) {
 
 // FormMooredRegister search form
 var FormMooredRegister = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -108,8 +108,8 @@ var FormMooredRegister = func(c *gin.Context) {
 
 // MooredRegister call for register arrivals
 var MooredRegister = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -131,8 +131,8 @@ var MooredRegister = func(c *gin.Context) {
 
 // AnchoredNow call for currently anchored
 var AnchoredNow = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -150,8 +150,8 @@ var AnchoredNow = func(c *gin.Context) {
 
 // FormAnchoredRegister search form
 var FormAnchoredRegister = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -170,8 +170,8 @@ var FormAnchoredRegister = func(c *gin.Context) {
 
 // AnchoredRegister call for register arrivals
 var AnchoredRegister = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -193,8 +193,8 @@ var AnchoredRegister = func(c *gin.Context) {
 
 // ActiveNow currently open trips
 var ActiveNow = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -211,8 +211,8 @@ var ActiveNow = func(c *gin.Context) {
 
 // ArrivalsToday call for arrivals today
 var ArrivalsToday = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -230,8 +230,8 @@ var ArrivalsToday = func(c *gin.Context) {
 
 // FormArrivalsRegister search form
 var FormArrivalsRegister = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -250,8 +250,8 @@ var FormArrivalsRegister = func(c *gin.Context) {
 
 // ArrivalsRegister call for register arrivals
 var ArrivalsRegister = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -273,8 +273,8 @@ var ArrivalsRegister = func(c *gin.Context) {
 
 // FormDeparturesRegister search form
 var FormDeparturesRegister = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -293,8 +293,8 @@ var FormDeparturesRegister = func(c *gin.Context) {
 
 // DeparturesRegister call for register arrivals
 var DeparturesRegister = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -316,8 +316,8 @@ var DeparturesRegister = func(c *gin.Context) {
 
 // DeparturesToday call for departures today
 var DeparturesToday = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -335,8 +335,8 @@ var DeparturesToday = func(c *gin.Context) {
 
 // ArrivalPrevisionsNow call for arrival previsions active
 var ArrivalPrevisionsNow = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -354,8 +354,8 @@ var ArrivalPrevisionsNow = func(c *gin.Context) {
 
 // ShippedGoodsToday todo doc
 var ShippedGoodsToday = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -373,8 +373,8 @@ var ShippedGoodsToday = func(c *gin.Context) {
 
 // TrafficListToday call for today ro/ro pax
 var TrafficListToday = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -392,8 +392,8 @@ var TrafficListToday = func(c *gin.Context) {
 
 // ShiftingPrevisionsNow call for arrival previsions active
 var ShiftingPrevisionsNow = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
@@ -411,8 +411,8 @@ var ShiftingPrevisionsNow = func(c *gin.Context) {
 
 // DeparturePrevisionsNow call for arrival previsions active
 var DeparturePrevisionsNow = func(c *gin.Context) {
-	conn := db.Connector()
-	repo := db.NewRepository(conn)
+	conn := sdb.Connector()
+	repo := sdb.NewRepository(conn)
 	defer repo.Close()
 
 	session := sessions.Default(c)
