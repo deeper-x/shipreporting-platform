@@ -28,6 +28,9 @@ var paths = map[string]string{
 	"mooredRegisterPath":         utils.FullPath("/templates/tables/moored_register.html"),
 	"formAnchoredRegisterPath":   utils.FullPath("/templates/tables/form_anchored_register.html"),
 	"anchoredRegisterPath":       utils.FullPath("/templates/tables/anchored_register.html"),
+	"showCustomersPath":          utils.FullPath("/templates/customers/show_all_customers.html"),
+	"FormAddCustomerPath":        utils.FullPath("/templates/customers/form_add_customer.html"),
+	"AllCustomersPath":           utils.FullPath("/templates/customers/all_customers.html"),
 }
 
 // multiRenderer todo doc
@@ -67,6 +70,10 @@ func multiRenderer() (bool, multitemplate.Renderer) {
 	r.AddFromFiles("form_anchored_register", paths["indexPath"], paths["formAnchoredRegisterPath"])
 	r.AddFromFiles("anchored_register", paths["indexPath"], paths["anchoredRegisterPath"])
 
+	// customers management
+	r.AddFromFiles("form_add_customer", paths["indexPath"], paths["FormAddCustomerPath"])
+	r.AddFromFiles("show_customers", paths["indexPath"], paths["showCustomersPath"])
+	r.AddFromFiles("all_customers", paths["indexPath"], paths["AllCustomersPath"])
 	return true, r
 }
 

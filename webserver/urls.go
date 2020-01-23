@@ -36,5 +36,12 @@ func (i *Instance) Route() {
 		private.GET("/moored_register/:id/:ts_start/:ts_stop", MooredRegister)
 		private.GET("/form_anchored_register", FormAnchoredRegister)
 		private.GET("/anchored_register/:id/:ts_start/:ts_stop", AnchoredRegister)
+		private.GET("/show_customers", ShowCustomers)
+
+		// customers management
+		private.GET("/form_add_customer", FormAddCustomer)
+		private.POST("/add_customer", AddCustomer)
+		private.GET("/del_customer/:id", DelCustomer)
+		private.GET("/all_customers", AllCustomers)
 	}
 }
